@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'OpenSans';
+    src: url('../fonts/OpenSans-Light.ttf');
+}
+
+html {
+	font-family: 'OpenSans';
+}
+
+body {
+	background-color: #f9f9f9;
+	font-family: 'OpenSans', sans-serif;
+	font-weight: lighter;
+}
+
+.navbar {
+	background: #292929;
+	border-top: 0;
+	border-bottom-color: #f1f1f1;
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+.navbar-default .navbar-nav > .active> a {
+    background-color: #00E676;
+}
+
+.item-container {
+	background-color: white;
+    margin: 40px;
+    box-shadow: -1px 1px 7px -2px #c7c7c7;
+    padding: 15px;
+    height: 100%;
+}
+
+.item-info .price {
+	width: 100%;
+	display: inline-block;
+	font-size: 40px	;
+}
+
+.item-info .title {
+	width: 100%;
+	display: inline-block;
+	font-size: 26px;
+	color: #989898;
+}
+
+.description-title {
+	display: inline-block;
+	font-size: 20px;
+	padding-top: 10px;
+}
+
+.description {
+	display: inline-block;
+	font-size: 14px;
+}
+
+.add-to-cart-btn {
+	padding-left:10px;
+	margin-top: 20px;
+}
+
+.more-info-title {
+	display: inline-block;
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+.more-info {
+	display: inline-block;
+	font-size: 14px;
+}

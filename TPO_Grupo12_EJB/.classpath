@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="ejbModule"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 10.x Runtime"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/TPO_Grupo12_Cliente/lib/jboss-client.jar"/>
+	<classpathentry kind="lib" path="/TPO_Grupo12_Cliente/lib/json-20160810.jar"/>
+	<classpathentry kind="lib" path="hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="hibernate3.jar"/>
+	<classpathentry kind="lib" path="mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
