@@ -2,7 +2,7 @@
     <wb-module deploy-name="TPO_Grupo12_EJB">
         <wb-resource deploy-path="/" source-path="/ejbModule" tag="defaultRootSource"/>
         <property name="java-output-path" value="/TPO_Grupo12_EJB/build/classes"/>
-        <property name="ClientProject" value="TPO_Grupo13_EJBClient"/>
-        <property name="ClientJARURI" value="TPO_Grupo13_EJBClient.jar"/>
+        <property name="ClientProject" value="TPO_Grupo12_EJBClient"/>
+        <property name="ClientJARURI" value="TPO_Grupo12_EJBClient.jar"/>
     </wb-module>
 </project-modules>

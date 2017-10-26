@@ -1,6 +1,13 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import model.HabitacionDTO;
+import model.HotelDTO;
+import model.ImagenDTO;
+import model.MedioDePagoDTO;
+import model.ServicioDTO;
 
 public class Hotel {
 
@@ -80,4 +87,13 @@ public class Hotel {
 		this.mediosDePago = mediosDePago;
 	}
 
+	public HotelDTO toDTO(){
+		List<ImagenDTO> imagenDTOList = new ArrayList<ImagenDTO>();
+		List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
+		List<HabitacionDTO> habitacionDTOList = new ArrayList<HabitacionDTO>();
+		List<MedioDePagoDTO> medioDePagoDTOList = new ArrayList<MedioDePagoDTO>();
+		
+		return new HotelDTO(hotelId, nombre, direccion.toDTO(), imagenDTOList, servicioDTOList,
+				habitacionDTOList, medioDePagoDTOList);
+	}
 }

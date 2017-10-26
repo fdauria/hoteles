@@ -7,4 +7,7 @@
       <context-root>TPO_Grupo12_Cliente</context-root>
     </web>
   </module>
+  <module>
+    <ejb>TPO_Grupo12_EJB.jar</ejb>
+  </module>
 </application>

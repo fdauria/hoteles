@@ -3,8 +3,8 @@
 	<name>TPO_Grupo12_EAR</name>
 	<comment></comment>
 	<projects>
-		<project>TPO_Grupo12_EJB</project>
 		<project>TPO_Grupo12_Cliente</project>
+		<project>TPO_Grupo12_EJB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

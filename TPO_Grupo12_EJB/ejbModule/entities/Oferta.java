@@ -2,6 +2,8 @@ package entities;
 
 import java.util.Date;
 
+import model.OfertaDTO;
+
 public class Oferta {
 
 	private int ofertaId;
@@ -82,5 +84,10 @@ public class Oferta {
 
 	public void setPoliticaCancelacion(String politicaCancelacion) {
 		this.politicaCancelacion = politicaCancelacion;
+	}
+	
+	public OfertaDTO toDTO(){
+		
+		return new OfertaDTO(ofertaId, fechaDesde, fechaHasta, price, hotel.toDTO(), habitacion.toDTO(), politicaCancelacion);
 	}
 }

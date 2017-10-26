@@ -1,6 +1,11 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import model.HabitacionDTO;
+import model.ImagenDTO;
+import model.ServicioDTO;
 
 public class Habitacion {
 
@@ -68,6 +73,12 @@ public class Habitacion {
 
 	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
+	}
+	
+	public HabitacionDTO toDTO(){
+		List<ImagenDTO> imagenDTOList = new ArrayList<ImagenDTO>();
+		List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
+		return new HabitacionDTO(habitacionId, descripcion, capacidad, tipo, imagenDTOList, servicioDTOList);
 	}
 
 }

@@ -1,5 +1,8 @@
 package entities;
 
+import model.DireccionDTO;
+
+
 public class Direccion {
 
 	private int direccionId;
@@ -41,6 +44,10 @@ public class Direccion {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+	
+	public DireccionDTO toDTO(){
+		return new DireccionDTO(direccionId, direccion, latitud, longitud);
 	}
 
 }
