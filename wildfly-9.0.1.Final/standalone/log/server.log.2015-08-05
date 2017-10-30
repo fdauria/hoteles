@@ -1,0 +1,200 @@
+2015-08-05 22:05:37,889 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 38) WFLYCLINF0001: Activating Infinispan subsystem.
+2015-08-05 22:05:37,898 WARN  [org.jboss.as.txn] (ServerService Thread Pool -- 54) WFLYTX0013: Node identifier property is set to the default value. Please make sure it is unique.
+2015-08-05 22:05:37,901 INFO  [org.jboss.as.security] (ServerService Thread Pool -- 53) WFLYSEC0002: Activating Security Subsystem
+2015-08-05 22:05:37,921 INFO  [org.jboss.as.naming] (ServerService Thread Pool -- 46) WFLYNAM0001: Activating Naming Subsystem
+2015-08-05 22:05:38,048 INFO  [org.jboss.as.security] (MSC service thread 1-5) WFLYSEC0001: Current PicketBox version=4.9.2.Final
+2015-08-05 22:05:38,074 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 55) WFLYUT0003: Undertow 1.2.9.Final starting
+2015-08-05 22:05:38,074 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-5) WFLYUT0003: Undertow 1.2.9.Final starting
+2015-08-05 22:05:38,103 INFO  [org.wildfly.extension.io] (ServerService Thread Pool -- 37) WFLYIO001: Worker 'default' has auto-configured to 8 core threads with 64 task threads based on your 4 available processors
+2015-08-05 22:05:38,122 INFO  [org.jboss.as.connector] (MSC service thread 1-5) WFLYJCA0009: Starting JCA Subsystem (IronJacamar 1.2.4.Final)
+2015-08-05 22:05:38,165 INFO  [org.jboss.as.naming] (MSC service thread 1-5) WFLYNAM0003: Starting Naming Service
+2015-08-05 22:05:38,167 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-5) WFLYMAIL0001: Bound mail session [java:jboss/mail/Default]
+2015-08-05 22:05:38,174 INFO  [org.jboss.as.jsf] (ServerService Thread Pool -- 44) WFLYJSF0007: Activated the following JSF Implementations: [main]
+2015-08-05 22:05:38,228 INFO  [org.jboss.as.connector.subsystems.datasources] (ServerService Thread Pool -- 33) WFLYJCA0004: Deploying JDBC-compliant driver class org.h2.Driver (version 1.3)
+2015-08-05 22:05:38,236 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0018: Started Driver service with driver-name = h2
+2015-08-05 22:05:38,238 INFO  [org.jboss.as.webservices] (ServerService Thread Pool -- 56) WFLYWS0002: Activating WebServices Extension
+2015-08-05 22:05:38,368 INFO  [org.jboss.remoting] (MSC service thread 1-6) JBoss Remoting version 4.0.9.Final
+2015-08-05 22:05:38,382 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 55) WFLYUT0014: Creating file handler for path D:\IA\wildfly-9.0.1.Final\bin\../welcome-content
+2015-08-05 22:05:38,405 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-1) WFLYUT0012: Started server default-server.
+2015-08-05 22:05:38,410 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-1) WFLYUT0018: Host default-host starting
+2015-08-05 22:05:38,512 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-2) WFLYUT0006: Undertow HTTP listener default listening on /0.0.0.0:8080
+2015-08-05 22:05:39,011 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-4) WFLYJCA0001: Bound data source [java:jboss/datasources/ExampleDS]
+2015-08-05 22:05:39,115 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-5) WFLYDS0013: Started FileSystemDeploymentService for directory D:\IA\wildfly-9.0.1.Final\bin\..\standalone\deployments
+2015-08-05 22:05:39,123 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-7) WFLYSRV0027: Starting deployment of "serverEAR.ear" (runtime-name: "serverEAR.ear")
+2015-08-05 22:05:39,267 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-7) WFLYSRV0207: Starting subdeployment (runtime-name: "server.jar")
+2015-08-05 22:05:39,379 INFO  [org.jboss.ws.common.management] (MSC service thread 1-4) JBWS022052: Starting JBoss Web Services - Stack CXF Server 5.0.0.Final
+2015-08-05 22:05:39,546 INFO  [org.jboss.weld.deployer] (MSC service thread 1-7) WFLYWELD0003: Processing weld deployment serverEAR.ear
+2015-08-05 22:05:39,647 INFO  [org.hibernate.validator.internal.util.Version] (MSC service thread 1-7) HV000001: Hibernate Validator 5.1.3.Final
+2015-08-05 22:05:39,782 INFO  [org.jboss.weld.deployer] (MSC service thread 1-7) WFLYWELD0003: Processing weld deployment server.jar
+2015-08-05 22:05:39,798 INFO  [org.jboss.as.ejb3.deployment.processors.EjbJndiBindingsDeploymentUnitProcessor] (MSC service thread 1-7) JNDI bindings for session bean named MiBean in deployment unit subdeployment "server.jar" of deployment "serverEAR.ear" are as follows:
+
+	java:global/serverEAR/server/MiBean!com.example.MiBeanRemote
+	java:app/server/MiBean!com.example.MiBeanRemote
+	java:module/MiBean!com.example.MiBeanRemote
+	java:jboss/exported/serverEAR/server/MiBean!com.example.MiBeanRemote
+	java:global/serverEAR/server/MiBean!com.example.MiBean
+	java:app/server/MiBean!com.example.MiBean
+	java:module/MiBean!com.example.MiBean
+	java:global/serverEAR/server/MiBean!com.example.MiBeanLocal
+	java:app/server/MiBean!com.example.MiBeanLocal
+	java:module/MiBean!com.example.MiBeanLocal
+
+2015-08-05 22:05:39,812 INFO  [org.jboss.weld.deployer] (MSC service thread 1-7) WFLYWELD0006: Starting Services for CDI deployment: serverEAR.ear
+2015-08-05 22:05:39,842 INFO  [org.jboss.weld.Version] (MSC service thread 1-7) WELD-000900: 2.2.14 (Final)
+2015-08-05 22:05:39,864 INFO  [org.jboss.weld.deployer] (MSC service thread 1-6) WFLYWELD0009: Starting weld service for deployment serverEAR.ear
+2015-08-05 22:05:40,527 INFO  [org.jboss.as.server] (ServerService Thread Pool -- 34) WFLYSRV0010: Deployed "serverEAR.ear" (runtime-name : "serverEAR.ear")
+2015-08-05 22:05:40,705 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://0.0.0.0:9990/management
+2015-08-05 22:05:40,705 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://0.0.0.0:9990
+2015-08-05 22:05:40,706 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 9.0.1.Final (WildFly Core 1.0.1.Final) started in 5500ms - Started 333 of 512 services (228 services are lazy, passive or on-demand)
+2015-08-05 22:08:20,965 INFO  [org.jboss.modules] (main) JBoss Modules version 1.4.3.Final
+2015-08-05 22:08:21,248 INFO  [org.jboss.msc] (main) JBoss MSC version 1.2.6.Final
+2015-08-05 22:08:21,327 INFO  [org.jboss.as] (MSC service thread 1-6) WFLYSRV0049: WildFly Full 9.0.1.Final (WildFly Core 1.0.1.Final) starting
+2015-08-05 22:08:21,329 DEBUG [org.jboss.as.config] (MSC service thread 1-6) Configured system properties:
+	awt.toolkit = sun.awt.windows.WToolkit
+	file.encoding = Cp1252
+	file.encoding.pkg = sun.io
+	file.separator = \
+	java.awt.graphicsenv = sun.awt.Win32GraphicsEnvironment
+	java.awt.headless = true
+	java.awt.printerjob = sun.awt.windows.WPrinterJob
+	java.class.path = D:\IA\wildfly-9.0.1.Final\jboss-modules.jar
+	java.class.version = 52.0
+	java.endorsed.dirs = D:\IA\jdk8\jre\lib\endorsed
+	java.ext.dirs = D:\IA\jdk8\jre\lib\ext;C:\Windows\Sun\Java\lib\ext
+	java.home = D:\IA\jdk8\jre
+	java.io.tmpdir = C:\Users\usuario\AppData\Local\Temp\
+	java.library.path = D:\IA\jdk8\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;native;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\PC Connectivity Solution\;C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\Users\usuario\Documents\ATI Stream\bin\x86_64;C:\Users\usuario\Documents\ATI Stream\bin\x86;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\TortoiseSVN\bin;k:\ft\;k:\ft\exe;k:\ft\apl;k:\ft\dos5uti;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Skype\Phone\;.
+	java.net.preferIPv4Stack = true
+	java.runtime.name = Java(TM) SE Runtime Environment
+	java.runtime.version = 1.8.0_51-b16
+	java.specification.name = Java Platform API Specification
+	java.specification.vendor = Oracle Corporation
+	java.specification.version = 1.8
+	java.util.logging.manager = org.jboss.logmanager.LogManager
+	java.vendor = Oracle Corporation
+	java.vendor.url = http://java.oracle.com/
+	java.vendor.url.bug = http://bugreport.sun.com/bugreport/
+	java.version = 1.8.0_51
+	java.vm.info = mixed mode
+	java.vm.name = Java HotSpot(TM) Server VM
+	java.vm.specification.name = Java Virtual Machine Specification
+	java.vm.specification.vendor = Oracle Corporation
+	java.vm.specification.version = 1.8
+	java.vm.vendor = Oracle Corporation
+	java.vm.version = 25.51-b03
+	javax.management.builder.initial = org.jboss.as.jmx.PluggableMBeanServerBuilder
+	javax.xml.datatype.DatatypeFactory = __redirected.__DatatypeFactory
+	javax.xml.parsers.DocumentBuilderFactory = __redirected.__DocumentBuilderFactory
+	javax.xml.parsers.SAXParserFactory = __redirected.__SAXParserFactory
+	javax.xml.stream.XMLEventFactory = __redirected.__XMLEventFactory
+	javax.xml.stream.XMLInputFactory = __redirected.__XMLInputFactory
+	javax.xml.stream.XMLOutputFactory = __redirected.__XMLOutputFactory
+	javax.xml.transform.TransformerFactory = __redirected.__TransformerFactory
+	javax.xml.validation.SchemaFactory:http://www.w3.org/2001/XMLSchema = __redirected.__SchemaFactory
+	javax.xml.xpath.XPathFactory:http://java.sun.com/jaxp/xpath/dom = __redirected.__XPathFactory
+	jboss.bind.address = 0.0.0.0
+	jboss.bind.address.management = 0.0.0.0
+	jboss.home.dir = D:\IA\wildfly-9.0.1.Final\bin\..
+	jboss.host.name = usuario-pc
+	jboss.modules.dir = D:\IA\wildfly-9.0.1.Final\bin\..\modules
+	jboss.modules.system.pkgs = org.jboss.byteman
+	jboss.node.name = usuario-pc
+	jboss.qualified.host.name = usuario-pc
+	jboss.server.base.dir = D:\IA\wildfly-9.0.1.Final\bin\..\standalone
+	jboss.server.config.dir = D:\IA\wildfly-9.0.1.Final\bin\..\standalone\configuration
+	jboss.server.data.dir = D:\IA\wildfly-9.0.1.Final\bin\..\standalone\data
+	jboss.server.deploy.dir = D:\IA\wildfly-9.0.1.Final\bin\..\standalone\data\content
+	jboss.server.log.dir = D:\IA\wildfly-9.0.1.Final\bin\..\standalone\log
+	jboss.server.name = usuario-pc
+	jboss.server.persist.config = true
+	jboss.server.temp.dir = D:\IA\wildfly-9.0.1.Final\bin\..\standalone\tmp
+	line.separator = 
+
+	logging.configuration = file:../standalone/configuration/logging.properties
+	module.path = ../modules
+	org.jboss.boot.log.file = ../standalone/log/boot.log
+	org.jboss.logmanager.nocolor = true
+	org.jboss.resolver.warning = true
+	org.xml.sax.driver = __redirected.__XMLReaderFactory
+	os.arch = x86
+	os.name = Windows 7
+	os.version = 6.1
+	path.separator = ;
+	program.name = JBossTools: WildFly 9
+	sun.arch.data.model = 32
+	sun.boot.class.path = D:\IA\jdk8\jre\lib\resources.jar;D:\IA\jdk8\jre\lib\rt.jar;D:\IA\jdk8\jre\lib\sunrsasign.jar;D:\IA\jdk8\jre\lib\jsse.jar;D:\IA\jdk8\jre\lib\jce.jar;D:\IA\jdk8\jre\lib\charsets.jar;D:\IA\jdk8\jre\lib\jfr.jar;D:\IA\jdk8\jre\classes
+	sun.boot.library.path = D:\IA\jdk8\jre\bin
+	sun.cpu.endian = little
+	sun.cpu.isalist = 
+	sun.desktop = windows
+	sun.io.unicode.encoding = UnicodeLittle
+	sun.java.command = org.jboss.modules.Main -mp ../modules -jaxpmodule javax.xml.jaxp-provider org.jboss.as.standalone -b 0.0.0.0 --server-config=standalone.xml -Djboss.server.base.dir=../standalone
+	sun.java.launcher = SUN_STANDARD
+	sun.jnu.encoding = Cp1252
+	sun.management.compiler = HotSpot Tiered Compilers
+	sun.os.patch.level = Service Pack 1
+	sun.rmi.dgc.client.gcInterval = 3600000
+	sun.rmi.dgc.server.gcInterval = 3600000
+	user.country = AR
+	user.dir = D:\IA\wildfly-9.0.1.Final\bin
+	user.home = C:\Users\usuario
+	user.language = es
+	user.name = usuario
+	user.script = 
+	user.timezone = America/Buenos_Aires
+	user.variant = 
+2015-08-05 22:08:21,330 DEBUG [org.jboss.as.config] (MSC service thread 1-6) VM Arguments: -Dprogram.name=JBossTools: WildFly 9 -Xms64m -Xmx512m -Dorg.jboss.resolver.warning=true -Djava.net.preferIPv4Stack=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Dorg.jboss.boot.log.file=../standalone/log/boot.log -Dlogging.configuration=file:../standalone/configuration/logging.properties -Djboss.home.dir=../ -Dorg.jboss.logmanager.nocolor=true -Djboss.bind.address.management=0.0.0.0 -Dfile.encoding=Cp1252 
+2015-08-05 22:08:22,710 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 10) WFLYCTL0028: Attribute 'enabled' in the resource at address '/subsystem=datasources/data-source=ExampleDS' is deprecated, and may be removed in future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+2015-08-05 22:08:22,730 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 21) WFLYCTL0028: Attribute 'job-repository-type' in the resource at address '/subsystem=batch' is deprecated, and may be removed in future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+2015-08-05 22:08:22,756 INFO  [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 1) WFLYDS0004: Found serverEAR.ear in deployment directory. To trigger deployment create a file called serverEAR.ear.dodeploy
+2015-08-05 22:08:22,777 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0039: Creating http management service using socket-binding (management-http)
+2015-08-05 22:08:22,800 INFO  [org.xnio] (MSC service thread 1-1) XNIO version 3.3.1.Final
+2015-08-05 22:08:22,817 INFO  [org.xnio.nio] (MSC service thread 1-1) XNIO NIO Implementation Version 3.3.1.Final
+2015-08-05 22:08:22,859 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 38) WFLYCLINF0001: Activating Infinispan subsystem.
+2015-08-05 22:08:22,863 INFO  [org.wildfly.extension.io] (ServerService Thread Pool -- 37) WFLYIO001: Worker 'default' has auto-configured to 8 core threads with 64 task threads based on your 4 available processors
+2015-08-05 22:08:22,868 INFO  [org.jboss.as.naming] (ServerService Thread Pool -- 46) WFLYNAM0001: Activating Naming Subsystem
+2015-08-05 22:08:22,870 INFO  [org.jboss.as.security] (ServerService Thread Pool -- 53) WFLYSEC0002: Activating Security Subsystem
+2015-08-05 22:08:22,882 WARN  [org.jboss.as.txn] (ServerService Thread Pool -- 54) WFLYTX0013: Node identifier property is set to the default value. Please make sure it is unique.
+2015-08-05 22:08:22,924 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 55) WFLYUT0003: Undertow 1.2.9.Final starting
+2015-08-05 22:08:22,927 INFO  [org.jboss.as.connector.subsystems.datasources] (ServerService Thread Pool -- 33) WFLYJCA0004: Deploying JDBC-compliant driver class org.h2.Driver (version 1.3)
+2015-08-05 22:08:22,967 INFO  [org.jboss.as.jsf] (ServerService Thread Pool -- 44) WFLYJSF0007: Activated the following JSF Implementations: [main]
+2015-08-05 22:08:22,983 INFO  [org.jboss.as.webservices] (ServerService Thread Pool -- 56) WFLYWS0002: Activating WebServices Extension
+2015-08-05 22:08:22,990 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-3) WFLYUT0003: Undertow 1.2.9.Final starting
+2015-08-05 22:08:22,993 INFO  [org.jboss.as.naming] (MSC service thread 1-3) WFLYNAM0003: Starting Naming Service
+2015-08-05 22:08:23,016 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-8) WFLYMAIL0001: Bound mail session [java:jboss/mail/Default]
+2015-08-05 22:08:23,036 INFO  [org.jboss.as.connector] (MSC service thread 1-8) WFLYJCA0009: Starting JCA Subsystem (IronJacamar 1.2.4.Final)
+2015-08-05 22:08:23,022 INFO  [org.jboss.as.security] (MSC service thread 1-2) WFLYSEC0001: Current PicketBox version=4.9.2.Final
+2015-08-05 22:08:23,118 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0018: Started Driver service with driver-name = h2
+2015-08-05 22:08:23,169 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 55) WFLYUT0014: Creating file handler for path D:\IA\wildfly-9.0.1.Final\bin\../welcome-content
+2015-08-05 22:08:23,318 INFO  [org.jboss.remoting] (MSC service thread 1-1) JBoss Remoting version 4.0.9.Final
+2015-08-05 22:08:23,343 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-8) WFLYUT0012: Started server default-server.
+2015-08-05 22:08:23,348 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-8) WFLYUT0018: Host default-host starting
+2015-08-05 22:08:23,607 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-6) WFLYUT0006: Undertow HTTP listener default listening on /0.0.0.0:8080
+2015-08-05 22:08:23,921 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0027: Starting deployment of "serverEAR.ear" (runtime-name: "serverEAR.ear")
+2015-08-05 22:08:23,932 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-1) WFLYDS0013: Started FileSystemDeploymentService for directory D:\IA\wildfly-9.0.1.Final\bin\..\standalone\deployments
+2015-08-05 22:08:24,022 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "server.jar")
+2015-08-05 22:08:24,111 INFO  [org.jboss.ws.common.management] (MSC service thread 1-5) JBWS022052: Starting JBoss Web Services - Stack CXF Server 5.0.0.Final
+2015-08-05 22:08:24,143 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-2) WFLYJCA0001: Bound data source [java:jboss/datasources/ExampleDS]
+2015-08-05 22:08:24,241 INFO  [org.jboss.weld.deployer] (MSC service thread 1-5) WFLYWELD0003: Processing weld deployment serverEAR.ear
+2015-08-05 22:08:24,302 INFO  [org.hibernate.validator.internal.util.Version] (MSC service thread 1-5) HV000001: Hibernate Validator 5.1.3.Final
+2015-08-05 22:08:24,430 INFO  [org.jboss.weld.deployer] (MSC service thread 1-5) WFLYWELD0003: Processing weld deployment server.jar
+2015-08-05 22:08:24,448 INFO  [org.jboss.as.ejb3.deployment.processors.EjbJndiBindingsDeploymentUnitProcessor] (MSC service thread 1-5) JNDI bindings for session bean named MiBean in deployment unit subdeployment "server.jar" of deployment "serverEAR.ear" are as follows:
+
+	java:global/serverEAR/server/MiBean!com.example.MiBeanLocal
+	java:app/server/MiBean!com.example.MiBeanLocal
+	java:module/MiBean!com.example.MiBeanLocal
+	java:global/serverEAR/server/MiBean!com.example.MiBeanRemote
+	java:app/server/MiBean!com.example.MiBeanRemote
+	java:module/MiBean!com.example.MiBeanRemote
+	java:jboss/exported/serverEAR/server/MiBean!com.example.MiBeanRemote
+	java:global/serverEAR/server/MiBean!com.example.MiBean
+	java:app/server/MiBean!com.example.MiBean
+	java:module/MiBean!com.example.MiBean
+
+2015-08-05 22:08:24,459 INFO  [org.jboss.weld.deployer] (MSC service thread 1-5) WFLYWELD0006: Starting Services for CDI deployment: serverEAR.ear
+2015-08-05 22:08:24,498 INFO  [org.jboss.weld.Version] (MSC service thread 1-5) WELD-000900: 2.2.14 (Final)
+2015-08-05 22:08:24,516 INFO  [org.jboss.weld.deployer] (MSC service thread 1-2) WFLYWELD0009: Starting weld service for deployment serverEAR.ear
+2015-08-05 22:08:25,369 INFO  [org.jboss.as.server] (ServerService Thread Pool -- 34) WFLYSRV0010: Deployed "serverEAR.ear" (runtime-name : "serverEAR.ear")
+2015-08-05 22:08:25,551 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://0.0.0.0:9990/management
+2015-08-05 22:08:25,553 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://0.0.0.0:9990
+2015-08-05 22:08:25,553 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 9.0.1.Final (WildFly Core 1.0.1.Final) started in 4904ms - Started 333 of 512 services (228 services are lazy, passive or on-demand)
