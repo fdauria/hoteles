@@ -1,10 +1,17 @@
 package entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import model.DireccionDTO;
 
-
+@Entity
 public class Direccion {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int direccionId;
 	private String direccion;
 	private float latitud;

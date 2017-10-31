@@ -1,19 +1,35 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import model.HabitacionDTO;
 import model.ImagenDTO;
 import model.ServicioDTO;
 
-public class Habitacion {
+@Entity
+public class Habitacion implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int habitacionId;
 	private String descripcion;
 	private int capacidad;
 	private String tipo;
+	
+	@OneToMany (mappedBy = "habitacion")
 	private List<Imagen> imagenes;
+	
+	@OneToMany (mappedBy = "habitacion")
 	private List<Servicio> servicios;
 
 	public Habitacion(int habitacionId, String descripcion, int capacidad, String tipo, List<Imagen> imagenes,

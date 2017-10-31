@@ -2,15 +2,27 @@ package entities;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import model.OfertaDTO;
 
+@Entity
 public class Oferta {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ofertaId;
 	private Date fechaDesde;
 	private Date fechaHasta;
 	private float price;
+	@ManyToOne @JoinColumn(name="hotelId")
 	private Hotel hotel;
+	@ManyToOne @JoinColumn(name="habitacionId")
 	private Habitacion habitacion;
 	private String politicaCancelacion;
 

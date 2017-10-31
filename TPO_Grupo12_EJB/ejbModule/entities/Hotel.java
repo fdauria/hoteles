@@ -3,20 +3,41 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import model.HabitacionDTO;
 import model.HotelDTO;
 import model.ImagenDTO;
 import model.MedioDePagoDTO;
 import model.ServicioDTO;
 
+@Entity
 public class Hotel {
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int hotelId;
 	private String nombre;
+	
+	@ManyToOne @JoinColumn(name="direccionId")
 	private Direccion direccion;
+	
+	@OneToMany (mappedBy = "hotelId")
 	private List<Imagen> imagenes;
+	
+	@OneToMany (mappedBy = "hotelId")
 	private List<Servicio> servicios;
+	
+	@OneToMany (mappedBy = "hotelId")
 	private List<Habitacion> habitaciones;
+	
+	@OneToMany (mappedBy = "hotelId")
 	private List<MedioDePago> mediosDePago;
 
 	public Hotel(int hotelId, String nombre, Direccion direccion, List<Imagen> imagenes, List<Servicio> servicios,
