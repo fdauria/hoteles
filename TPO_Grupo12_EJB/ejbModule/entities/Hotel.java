@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -21,21 +20,23 @@ import model.ServicioDTO;
 @Entity
 public class Hotel implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int hotelId;
 	private String nombre;
 	
-	@ManyToOne @JoinColumn(name="direccionId")
+	@ManyToOne
 	private Direccion direccion;
 	
-	@OneToMany (mappedBy = "hotelId")
+	@OneToMany
 	private List<Servicio> servicios;
 	
-	@OneToMany (mappedBy = "hotelId")
+	@OneToMany
 	private List<Habitacion> habitaciones;
 	
-	@OneToMany (mappedBy = "hotelId")
+	@OneToMany
 	private List<MedioDePago> mediosDePago;
 
 	public Hotel(int hotelId, String nombre, Direccion direccion, List<Servicio> servicios,

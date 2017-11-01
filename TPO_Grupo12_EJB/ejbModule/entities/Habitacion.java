@@ -26,7 +26,7 @@ public class Habitacion implements Serializable{
 	private int capacidad;
 	private String tipo;
 	
-	@OneToMany (mappedBy = "habitacion")
+	@OneToMany
 	private List<Servicio> servicios;
 
 	public Habitacion(int habitacionId, String descripcion, int capacidad, String tipo,

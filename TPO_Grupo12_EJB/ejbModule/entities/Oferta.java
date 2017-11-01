@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import model.OfertaDTO;
@@ -15,15 +14,19 @@ import model.OfertaDTO;
 @Entity
 public class Oferta implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ofertaId;
 	private Date fechaDesde;
 	private Date fechaHasta;
 	private float price;
-	@ManyToOne @JoinColumn(name="hotelId")
+	
+	@ManyToOne
 	private Hotel hotel;
-	@ManyToOne @JoinColumn(name="habitacionId")
+	
+	@ManyToOne
 	private Habitacion habitacion;
 	private String politicaCancelacion;
 
