@@ -1,5 +1,6 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import javax.persistence.ManyToOne;
 import model.OfertaDTO;
 
 @Entity
-public class Oferta {
+public class Oferta implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

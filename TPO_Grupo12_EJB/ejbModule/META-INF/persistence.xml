@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE xml>
 <persistence>
-<persistence-unit name="moduloHoteles">
-<jta-data-source>java:jboss/SQLSERVERDS</jta-data-source>
-<properties>
-<property name="hibernate.show_sql" value="true"/>
-<!-- <property name="hibernate.hbm2ddl.auto" value="create-drop"/> -->
-<property name="hibernate.show_sql true" value="true"/>
-</properties>
-</persistence-unit>
+	<persistence-unit name="hoteles">
+		<jta-data-source>java:/SQLSERVERDS</jta-data-source>
+		<properties>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.hbm2ddl.auto" value="validate" /> 
+			<property name="javax.persistence.validation.mode">none</property>
+		</properties>
+	</persistence-unit> 
 </persistence>

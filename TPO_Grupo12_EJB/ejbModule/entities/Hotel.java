@@ -1,5 +1,6 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import model.MedioDePagoDTO;
 import model.ServicioDTO;
 
 @Entity
-public class Hotel {
+public class Hotel implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,9 +30,6 @@ public class Hotel {
 	private Direccion direccion;
 	
 	@OneToMany (mappedBy = "hotelId")
-	private List<Imagen> imagenes;
-	
-	@OneToMany (mappedBy = "hotelId")
 	private List<Servicio> servicios;
 	
 	@OneToMany (mappedBy = "hotelId")
@@ -40,13 +38,12 @@ public class Hotel {
 	@OneToMany (mappedBy = "hotelId")
 	private List<MedioDePago> mediosDePago;
 
-	public Hotel(int hotelId, String nombre, Direccion direccion, List<Imagen> imagenes, List<Servicio> servicios,
+	public Hotel(int hotelId, String nombre, Direccion direccion, List<Servicio> servicios,
 			List<Habitacion> habitaciones, List<MedioDePago> mediosDePago) {
 		super();
 		this.hotelId = hotelId;
 		this.nombre = nombre;
 		this.direccion = direccion;
-		this.imagenes = imagenes;
 		this.servicios = servicios;
 		this.habitaciones = habitaciones;
 		this.mediosDePago = mediosDePago;
@@ -74,14 +71,6 @@ public class Hotel {
 
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
-	}
-
-	public List<Imagen> getImagenes() {
-		return imagenes;
-	}
-
-	public void setImagenes(List<Imagen> imagenes) {
-		this.imagenes = imagenes;
 	}
 
 	public List<Servicio> getServicios() {

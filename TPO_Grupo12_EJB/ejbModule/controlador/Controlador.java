@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import hibernate.HibernateDAOLocal;
+import manager.ManagerLocal;
 import model.HotelDTO;
 import model.OfertaDTO;
 
@@ -13,7 +13,7 @@ import model.OfertaDTO;
 public class Controlador implements ControladorRemote {
 
 	@EJB
-	private HibernateDAOLocal interfaceLocal;
+	private ManagerLocal interfaceLocal;
 
 	public Controlador() {
 	}

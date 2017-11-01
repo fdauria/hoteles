@@ -1,9 +1,11 @@
-package hibernate;
+package manager;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import entities.Hotel;
 import entities.Oferta;
@@ -11,9 +13,38 @@ import model.HotelDTO;
 import model.OfertaDTO;
 
 @Stateless
-public class HibernateDAO extends DAOClass implements HibernateDAOLocal {
+public class Manager implements ManagerLocal {
 
-	public HibernateDAO() {
+	@PersistenceContext(unitName = "hoteles")
+	private EntityManager em;
+
+	public EntityManager getEntityManager() {
+		return em;
+	}
+
+	public <T> T saveEntity(T entity) {
+		em.persist(entity);
+		em.flush();
+		return entity;
+	}
+
+	public <T> T updateEntity(T entity) {
+		em.merge(entity);
+		return entity;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> List<T> getAll(Class<T> cls, String tabla) {
+		try {
+			List<T> list = em.createQuery("from " + tabla).getResultList();
+			return list;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Manager() {
 	}
 
 	@Override

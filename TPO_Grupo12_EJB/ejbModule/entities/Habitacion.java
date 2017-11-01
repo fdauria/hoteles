@@ -27,19 +27,15 @@ public class Habitacion implements Serializable{
 	private String tipo;
 	
 	@OneToMany (mappedBy = "habitacion")
-	private List<Imagen> imagenes;
-	
-	@OneToMany (mappedBy = "habitacion")
 	private List<Servicio> servicios;
 
-	public Habitacion(int habitacionId, String descripcion, int capacidad, String tipo, List<Imagen> imagenes,
+	public Habitacion(int habitacionId, String descripcion, int capacidad, String tipo,
 			List<Servicio> servicios) {
 		super();
 		this.habitacionId = habitacionId;
 		this.descripcion = descripcion;
 		this.capacidad = capacidad;
 		this.tipo = tipo;
-		this.imagenes = imagenes;
 		this.servicios = servicios;
 	}
 
@@ -73,14 +69,6 @@ public class Habitacion implements Serializable{
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
-	}
-
-	public List<Imagen> getImagenes() {
-		return imagenes;
-	}
-
-	public void setImagenes(List<Imagen> imagenes) {
-		this.imagenes = imagenes;
 	}
 
 	public List<Servicio> getServicios() {

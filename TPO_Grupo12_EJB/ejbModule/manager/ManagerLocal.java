@@ -1,4 +1,4 @@
-package hibernate;
+package manager;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import model.HotelDTO;
 import model.OfertaDTO;
 
 @Local
-public interface HibernateDAOLocal {
+public interface ManagerLocal {
 
 	public List<HotelDTO> obtenerHoteles();
 
