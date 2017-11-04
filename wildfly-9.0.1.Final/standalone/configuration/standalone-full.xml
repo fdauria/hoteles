@@ -151,7 +151,7 @@
                     <driver>sqljdbc42.jar</driver>
                     <security>
                         <user-name>mau</user-name>
-                        <password>M4ur1c10</password>
+                        <password>test</password>
                     </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLValidConnectionChecker"/>
@@ -394,7 +394,10 @@
                     </jms-queue>
                 </jms-destinations>
             </hornetq-server>
-        </subsystem>
+            <hornetq-server name="ColaOfertaHoteles">
+                <security-enabled>false</security-enabled>
+</hornetq-server>
+</subsystem>
         <subsystem xmlns="urn:jboss:domain:naming:2.0">
             <remote-naming/>
         </subsystem>
