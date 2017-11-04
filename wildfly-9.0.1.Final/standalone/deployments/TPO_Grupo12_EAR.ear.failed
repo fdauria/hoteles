@@ -1,4 +1,0 @@
-"{\"WFLYCTL0180: Services with missing/unavailable dependencies\" => [
-    \"jboss.persistenceunit.\\\"TPO_Grupo12_EAR.ear/TPO_Grupo12_EJB.jar#moduloHoteles\\\".__FIRST_PHASE__ is missing [jboss.naming.context.java.jboss.SQLSERVERDS]\",
-    \"jboss.persistenceunit.\\\"TPO_Grupo12_EAR.ear/TPO_Grupo12_EJB.jar#moduloHoteles\\\" is missing [jboss.naming.context.java.jboss.SQLSERVERDS]\"
-]}"
