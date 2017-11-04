@@ -151,18 +151,13 @@
                     <driver>sqljdbc42.jar</driver>
                     <security>
                         <user-name>mau</user-name>
-                        <password>test</password>
+                        <password>M4ur1c10</password>
                     </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLValidConnectionChecker"/>
                         <background-validation>true</background-validation>
                     </validation>
                 </datasource>
-                <drivers>
-                    <driver name="h2" module="com.h2database.h2">
-                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
-                    </driver>
-                </drivers>
             </datasources>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:2.0">
