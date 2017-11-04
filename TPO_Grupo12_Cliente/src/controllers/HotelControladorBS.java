@@ -6,14 +6,13 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.naming.Context;
 import javax.naming.NamingException;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 import controlador.Controlador;
 import controlador.ControladorRemote;
 
-@Path("/service")
+@Path("/hello")
 @Stateless
 public class HotelControladorBS {
 
@@ -34,8 +33,6 @@ public class HotelControladorBS {
 		}
 	}
 
-	@GET
-	@Path("/hello")
 	public String hello(@QueryParam("name") String name) {
 		return controlador.hello(name);
 	}

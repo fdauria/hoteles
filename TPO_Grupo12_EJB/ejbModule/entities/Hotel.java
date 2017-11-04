@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.sun.istack.internal.Nullable;
-
 import model.HabitacionDTO;
 import model.HotelDTO;
 import model.ImagenDTO;
@@ -40,11 +38,9 @@ public class Hotel implements Serializable{
 	
 	@OneToMany
 	private List<MedioDePago> mediosDePago;
-	
-	private String image;
 
 	public Hotel(int hotelId, String nombre, Direccion direccion, List<Servicio> servicios,
-			List<Habitacion> habitaciones, List<MedioDePago> mediosDePago, @Nullable String image) {
+			List<Habitacion> habitaciones, List<MedioDePago> mediosDePago) {
 		super();
 		this.hotelId = hotelId;
 		this.nombre = nombre;
@@ -52,7 +48,6 @@ public class Hotel implements Serializable{
 		this.servicios = servicios;
 		this.habitaciones = habitaciones;
 		this.mediosDePago = mediosDePago;
-		this.image = image;
 	}
 
 	public int getHotelId() {
@@ -101,14 +96,6 @@ public class Hotel implements Serializable{
 
 	public void setMediosDePago(List<MedioDePago> mediosDePago) {
 		this.mediosDePago = mediosDePago;
-	}
-	
-	public void setImage(String image){
-		this.image = image;
-	}
-	
-	public String getImage(){
-		return this.image;
 	}
 
 	public HotelDTO toDTO(){
