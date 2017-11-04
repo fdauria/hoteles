@@ -1,6 +1,30 @@
 package model;
 
-public enum MedioDePagoDTO {
+import java.io.Serializable;
 
-	TODOPAGO, MERCADOPAGO, PAGOMISCUENTAS, PAGOENHOTEL;
+public class MedioDePagoDTO  implements Serializable{
+
+	private int medioDePagoId;
+	private String descripcion;
+	
+	public MedioDePagoDTO() {
+	}
+	
+	public MedioDePagoDTO(int medioDePagoId, String descripcion) {
+		this.medioDePagoId = medioDePagoId;
+		this.descripcion = descripcion;
+	}
+	
+	public int getMedioDePagoId() {
+		return medioDePagoId;
+	}
+	public void setMedioDePagoId(int medioDePagoId) {
+		this.medioDePagoId = medioDePagoId;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }

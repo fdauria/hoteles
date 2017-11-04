@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -15,11 +17,10 @@ import com.sun.istack.internal.Nullable;
 
 import model.HabitacionDTO;
 import model.HotelDTO;
-import model.ImagenDTO;
 import model.MedioDePagoDTO;
 import model.ServicioDTO;
 
-@Entity
+@Entity(name="hotel")
 public class Hotel implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -27,6 +28,7 @@ public class Hotel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int hotelId;
+	
 	private String nombre;
 	
 	@ManyToOne
@@ -41,18 +43,21 @@ public class Hotel implements Serializable{
 	@OneToMany
 	private List<MedioDePago> mediosDePago;
 	
-	private String image;
+	private String imagen;
+	
+	public Hotel(){
+		
+	}
 
-	public Hotel(int hotelId, String nombre, Direccion direccion, List<Servicio> servicios,
-			List<Habitacion> habitaciones, List<MedioDePago> mediosDePago, @Nullable String image) {
+	public Hotel(String nombre, Direccion direccion, List<Servicio> servicios,
+			@Nullable List<Habitacion> habitaciones, List<MedioDePago> mediosDePago, @Nullable String imagen) {
 		super();
-		this.hotelId = hotelId;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.servicios = servicios;
 		this.habitaciones = habitaciones;
 		this.mediosDePago = mediosDePago;
-		this.image = image;
+		this.imagen = imagen;
 	}
 
 	public int getHotelId() {
@@ -103,21 +108,19 @@ public class Hotel implements Serializable{
 		this.mediosDePago = mediosDePago;
 	}
 	
-	public void setImage(String image){
-		this.image = image;
+	public void setImagen(String imagen){
+		this.imagen = imagen;
 	}
 	
-	public String getImage(){
-		return this.image;
+	public String getImagen(){
+		return this.imagen;
 	}
 
 	public HotelDTO toDTO(){
-		List<ImagenDTO> imagenDTOList = new ArrayList<ImagenDTO>();
 		List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
 		List<HabitacionDTO> habitacionDTOList = new ArrayList<HabitacionDTO>();
 		List<MedioDePagoDTO> medioDePagoDTOList = new ArrayList<MedioDePagoDTO>();
 		
-		return new HotelDTO(hotelId, nombre, direccion.toDTO(), imagenDTOList, servicioDTOList,
-				habitacionDTOList, medioDePagoDTOList);
+		return new HotelDTO(hotelId, nombre, direccion.toDTO(), servicioDTOList,habitacionDTOList, medioDePagoDTOList, imagen);
 	}
 }

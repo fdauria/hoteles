@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class OfertaDTO {
+public class OfertaDTO  implements Serializable{
 
 	private int ofertaId;
 	private Date fechaDesde;

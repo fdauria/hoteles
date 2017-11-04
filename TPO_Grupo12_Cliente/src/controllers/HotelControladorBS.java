@@ -1,43 +1,39 @@
 package controllers;
 
-import java.util.Hashtable;
-
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
 
-import controlador.Controlador;
 import controlador.ControladorRemote;
+import model.HotelDTO;
 
-@Path("/service")
-@Stateless
 public class HotelControladorBS {
+
+	private static HotelControladorBS instancia;
 
 	@EJB
 	private ControladorRemote controlador;
 
-	@SuppressWarnings("unchecked")
-	private HotelControladorBS() {
+	public static HotelControladorBS getInstancia() {
+		if (instancia == null)
+			instancia = new HotelControladorBS();
+		return instancia;
+	}
+
+	public HotelControladorBS() {
+
 		try {
-			@SuppressWarnings("rawtypes")
-			final Hashtable conn = new Hashtable();
-			conn.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			final Context cont = new javax.naming.InitialContext(conn);
-			controlador = (Controlador) cont.lookup(
+			InitialContext initialContext = new InitialContext();
+			controlador = (ControladorRemote) initialContext.lookup(
 					"ejb:TPO_Grupo12_EAR/TPO_Grupo12_EJB/" + "" + "/Controlador!" + ControladorRemote.class.getName());
 		} catch (NamingException ex) {
 			ex.printStackTrace();
 		}
+
 	}
 
-	@GET
-	@Path("/hello")
-	public String hello(@QueryParam("name") String name) {
-		return controlador.hello(name);
+	public void crearHotel(HotelDTO hotelDTO) {
+		controlador.agregarHotel(hotelDTO);
 	}
 
 }

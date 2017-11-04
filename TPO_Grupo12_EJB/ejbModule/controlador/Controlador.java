@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import manager.ManagerLocal;
+import manager.ManagerRemote;
 import model.HotelDTO;
 import model.OfertaDTO;
 
@@ -13,24 +13,24 @@ import model.OfertaDTO;
 public class Controlador implements ControladorRemote {
 
 	@EJB
-	private ManagerLocal interfaceLocal;
+	private ManagerRemote inferfazRemota;
 
 	public Controlador() {
 	}
 	
 	@Override
 	public List<HotelDTO> obtenerHoteles() {
-		return interfaceLocal.obtenerHoteles();
+		return inferfazRemota.obtenerHoteles();
 	}
 
 	@Override
 	public HotelDTO agregarHotel(HotelDTO hotel) {
-		return interfaceLocal.agregarHotel(hotel);
+		return inferfazRemota.agregarHotel(hotel);
 	}
 
 	@Override
 	public HotelDTO obtenerHotel(int id) {
-		return interfaceLocal.obtenerHotel(id);
+		return inferfazRemota.obtenerHotel(id);
 	}
 
 	@Override
@@ -40,16 +40,16 @@ public class Controlador implements ControladorRemote {
 	
 	@Override
 	public List<OfertaDTO> obtenerOfertas() {
-		return interfaceLocal.obtenerOfertas();
+		return inferfazRemota.obtenerOfertas();
 	}
 
 	@Override
 	public OfertaDTO agregarOferta(OfertaDTO oferta) {
-		return interfaceLocal.agregarOferta(oferta);
+		return inferfazRemota.agregarOferta(oferta);
 	}
 
 	@Override
 	public OfertaDTO obtenerOferta(int id) {
-		return interfaceLocal.obtenerOferta(id);
+		return inferfazRemota.obtenerOferta(id);
 	}
 }

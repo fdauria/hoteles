@@ -18,10 +18,14 @@ public class Direccion implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int direccionId;
 	private String direccion;
-	private float latitud;
-	private float longitud;
+	private String latitud;
+	private String longitud;
 
-	public Direccion(int direccionId, String direccion, float latitud, float longitud) {
+	public Direccion(){
+		
+	}
+	
+	public Direccion(int direccionId, String direccion, String latitud, String longitud) {
 		super();
 		this.direccionId = direccionId;
 		this.direccion = direccion;
@@ -37,19 +41,19 @@ public class Direccion implements Serializable{
 		this.direccionId = direccionId;
 	}
 
-	public float getLatitud() {
+	public String getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(float latitud) {
+	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
 
-	public float getLongitud() {
+	public String getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(float longitud) {
+	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
 
@@ -60,5 +64,6 @@ public class Direccion implements Serializable{
 	public DireccionDTO toDTO(){
 		return new DireccionDTO(direccionId, direccion, latitud, longitud);
 	}
+
 
 }

@@ -29,7 +29,7 @@ public class Hoteles extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("./hoteles.jsp").forward(request, response);
+		request.getRequestDispatcher("/hoteles.jsp").forward(request, response);
 	}
 
 	/**

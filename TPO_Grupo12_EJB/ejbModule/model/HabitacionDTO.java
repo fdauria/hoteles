@@ -1,24 +1,23 @@
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HabitacionDTO {
+public class HabitacionDTO  implements Serializable{
 
 	private int habitacionId;
 	private String descripcion;
 	private int capacidad;
 	private String tipo;
-	private List<ImagenDTO> imagenes;
 	private List<ServicioDTO> servicios;
 
-	public HabitacionDTO(int habitacionId, String descripcion, int capacidad, String tipo, List<ImagenDTO> imagenes,
+	public HabitacionDTO(int habitacionId, String descripcion, int capacidad, String tipo,
 			List<ServicioDTO> servicios) {
 		super();
 		this.habitacionId = habitacionId;
 		this.descripcion = descripcion;
 		this.capacidad = capacidad;
 		this.tipo = tipo;
-		this.imagenes = imagenes;
 		this.servicios = servicios;
 	}
 
@@ -54,13 +53,6 @@ public class HabitacionDTO {
 		this.tipo = tipo;
 	}
 
-	public List<ImagenDTO> getImagenes() {
-		return imagenes;
-	}
-
-	public void setImagenes(List<ImagenDTO> imagenes) {
-		this.imagenes = imagenes;
-	}
 
 	public List<ServicioDTO> getServicios() {
 		return servicios;

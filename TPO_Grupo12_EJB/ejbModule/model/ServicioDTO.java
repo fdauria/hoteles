@@ -1,16 +1,38 @@
 package model;
 
-public class ServicioDTO {
+import java.io.Serializable;
 
+public class ServicioDTO  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
 	private int servicioId;
+	private int key;
 	private String descripcion;
 
-	public ServicioDTO() {
-
+	
+	public ServicioDTO(int key, String descripcion) {
+		this.key = key;
+		this.descripcion = descripcion;
 	}
+	
+	public ServicioDTO(int servicioId, int key, String descripcion) {
+		this.servicioId = servicioId;
+		this.key = key;
+		this.descripcion = descripcion;
+	}	
+	
 
 	public int getServicioId() {
 		return servicioId;
+	}
+	
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 
 	public void setServicioId(int servicioId) {

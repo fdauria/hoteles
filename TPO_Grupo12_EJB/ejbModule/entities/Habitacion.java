@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import model.HabitacionDTO;
-import model.ImagenDTO;
 import model.ServicioDTO;
 
 @Entity
@@ -80,9 +79,8 @@ public class Habitacion implements Serializable{
 	}
 	
 	public HabitacionDTO toDTO(){
-		List<ImagenDTO> imagenDTOList = new ArrayList<ImagenDTO>();
 		List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
-		return new HabitacionDTO(habitacionId, descripcion, capacidad, tipo, imagenDTOList, servicioDTOList);
+		return new HabitacionDTO(habitacionId, descripcion, capacidad, tipo, servicioDTOList);
 	}
 
 }
