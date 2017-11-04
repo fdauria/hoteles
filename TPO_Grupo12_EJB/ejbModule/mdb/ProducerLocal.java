@@ -1,8 +1,8 @@
-package mdb;
-
-import javax.ejb.Local;
-
-@Local
-public interface ProducerLocal {
-
-}
+//package mdb;
+//
+//import javax.ejb.Local;
+//
+//@Local
+//public interface ProducerLocal {
+//
+//}
