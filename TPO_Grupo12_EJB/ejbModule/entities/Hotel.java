@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +19,7 @@ import model.HotelDTO;
 import model.MedioDePagoDTO;
 import model.ServicioDTO;
 
-@Entity(name="hotel")
+@Entity
 public class Hotel implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -37,11 +36,14 @@ public class Hotel implements Serializable{
 	@OneToMany
 	private List<Servicio> servicios;
 	
-	@OneToMany
+	@OneToMany @JoinColumn(name="hotel")
 	private List<Habitacion> habitaciones;
 	
 	@OneToMany
 	private List<MedioDePago> mediosDePago;
+	
+	@OneToMany @JoinColumn(name="hotel")
+	private List<Oferta> ofertas;
 	
 	private String imagen;
 	
@@ -50,8 +52,7 @@ public class Hotel implements Serializable{
 	}
 
 	public Hotel(String nombre, Direccion direccion, List<Servicio> servicios,
-			@Nullable List<Habitacion> habitaciones, List<MedioDePago> mediosDePago, @Nullable String imagen) {
-		super();
+			@Nullable List<Habitacion> habitaciones, List<MedioDePago> mediosDePago, @Nullable String imagen, @Nullable List<Oferta> ofertas) {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.servicios = servicios;
@@ -114,6 +115,14 @@ public class Hotel implements Serializable{
 	
 	public String getImagen(){
 		return this.imagen;
+	}
+	
+	public List<Oferta> getOfertas() {
+		return ofertas;
+	}
+
+	public void setOfertas(List<Oferta> ofertas) {
+		this.ofertas = ofertas;
 	}
 
 	public HotelDTO toDTO(){

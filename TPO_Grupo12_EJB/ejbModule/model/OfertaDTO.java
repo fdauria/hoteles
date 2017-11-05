@@ -5,11 +5,12 @@ import java.util.Date;
 
 public class OfertaDTO  implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private int ofertaId;
 	private Date fechaDesde;
 	private Date fechaHasta;
 	private float price;
-	private HotelDTO hotel;
 	private HabitacionDTO habitacion;
 	private String politicaCancelacion;
 
@@ -17,14 +18,13 @@ public class OfertaDTO  implements Serializable{
 
 	}
 
-	public OfertaDTO(int ofertaId, Date fechaDesde, Date fechaHasta, float price, HotelDTO hotel, HabitacionDTO habitacion,
+	public OfertaDTO(int ofertaId, Date fechaDesde, Date fechaHasta, float price, HabitacionDTO habitacion,
 			String politicaCancelacion) {
 		super();
 		this.ofertaId = ofertaId;
 		this.fechaDesde = fechaDesde;
 		this.fechaHasta = fechaHasta;
 		this.price = price;
-		this.hotel = hotel;
 		this.habitacion = habitacion;
 		this.politicaCancelacion = politicaCancelacion;
 	}
@@ -59,14 +59,6 @@ public class OfertaDTO  implements Serializable{
 
 	public void setPrice(float price) {
 		this.price = price;
-	}
-
-	public HotelDTO getHotel() {
-		return hotel;
-	}
-
-	public void setHotel(HotelDTO hotel) {
-		this.hotel = hotel;
 	}
 
 	public HabitacionDTO getHabitacion() {

@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import model.MedioDePagoDTO;
+
 @Entity
 public class MedioDePago implements Serializable{
 
@@ -38,6 +40,10 @@ public class MedioDePago implements Serializable{
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public MedioDePagoDTO toDTO(){
+		return new MedioDePagoDTO(medioDePagoId, descripcion);
 	}
 	
 	

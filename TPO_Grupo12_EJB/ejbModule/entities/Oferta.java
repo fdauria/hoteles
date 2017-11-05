@@ -22,10 +22,6 @@ public class Oferta implements Serializable{
 	private Date fechaDesde;
 	private Date fechaHasta;
 	private float price;
-	
-	@ManyToOne
-	private Hotel hotel;
-	
 	@ManyToOne
 	private Habitacion habitacion;
 	private String politicaCancelacion;
@@ -41,7 +37,6 @@ public class Oferta implements Serializable{
 		this.fechaDesde = fechaDesde;
 		this.fechaHasta = fechaHasta;
 		this.price = price;
-		this.hotel = hotel;
 		this.habitacion = habitacion;
 		this.politicaCancelacion = politicaCancelacion;
 	}
@@ -77,7 +72,7 @@ public class Oferta implements Serializable{
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
+/*
 	public Hotel getHotel() {
 		return hotel;
 	}
@@ -85,7 +80,7 @@ public class Oferta implements Serializable{
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
-
+*/
 	public Habitacion getHabitacion() {
 		return habitacion;
 	}
@@ -103,7 +98,6 @@ public class Oferta implements Serializable{
 	}
 	
 	public OfertaDTO toDTO(){
-		
-		return new OfertaDTO(ofertaId, fechaDesde, fechaHasta, price, hotel.toDTO(), habitacion.toDTO(), politicaCancelacion);
+		return new OfertaDTO(ofertaId, fechaDesde, fechaHasta, price, habitacion.toDTO(), politicaCancelacion);
 	}
 }
