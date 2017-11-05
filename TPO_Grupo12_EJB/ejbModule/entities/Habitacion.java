@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -26,9 +28,11 @@ public class Habitacion implements Serializable{
 	private int capacidad;
 	private String tipo;
 	@ManyToOne
+	@JoinColumn (name="hotelId")
 	private Hotel hotel;
 	
 	@OneToMany
+	@JoinTable(name="Habitacion_Servicio", joinColumns={@JoinColumn(name="habitacionId")}, inverseJoinColumns={@JoinColumn(name="servicioId")})
 	private List<Servicio> servicios;
 
 	public Habitacion(int habitacionId, String descripcion, int capacidad, String tipo,

@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -33,20 +35,20 @@ public class Hotel implements Serializable{
 	private String nombre;
 
 	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = 	"direccionId")
 	private Direccion direccion;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name="Hotel_Servicio", joinColumns={@JoinColumn(name="hotelId")}, inverseJoinColumns={@JoinColumn(name="servicioId")})
 	private List<Servicio> servicios;
 	
 	@OneToMany(mappedBy="hotel") 
-	private List<Habitacion> habitaciones;
-	
-	@OneToMany @JoinColumn(name="hotel")
-	private List<Oferta> ofertas;
+	private List<Habitacion> habitaciones = new ArrayList<Habitacion>();	
 	
 	private String imagen;
 
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name="Hotel_MedioDePago", joinColumns={@JoinColumn(name="hotelId")}, inverseJoinColumns={@JoinColumn(name="medioDePagoId")})
 	private List<MedioDePago> mediosDePago;
 	
 	
@@ -119,19 +121,11 @@ public class Hotel implements Serializable{
 	public String getImagen(){
 		return this.imagen;
 	}
-	
-	public List<Oferta> getOfertas() {
-		return ofertas;
-	}
-
-	public void setOfertas(List<Oferta> ofertas) {
-		this.ofertas = ofertas;
-	}
 
 	public HotelDTO toDTO(){
-		List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
-		List<HabitacionDTO> habitacionDTOList = new ArrayList<HabitacionDTO>();
-		List<MedioDePagoDTO> medioDePagoDTOList = new ArrayList<MedioDePagoDTO>();
+		final List<ServicioDTO> servicioDTOList 		= servicios.stream().map(servicio -> servicio.toDTO()).collect(Collectors.toList());
+		final List<HabitacionDTO> habitacionDTOList 	= habitaciones.stream().map(habitacion -> habitacion.toDTO()).collect(Collectors.toList());
+		final List<MedioDePagoDTO> medioDePagoDTOList 	= mediosDePago.stream().map(medioDePago -> medioDePago.toDTO()).collect(Collectors.toList());
 		
 		return new HotelDTO(hotelId, nombre, direccion.toDTO(), servicioDTOList,habitacionDTOList, medioDePagoDTOList, imagen);
 	}

@@ -48,7 +48,7 @@ public class Servicio implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public ServicioDTO toDT(){
+	public ServicioDTO toDTO(){
 		return new ServicioDTO(servicioId, clave, descripcion);
 	}
 
