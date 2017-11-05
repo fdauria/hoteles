@@ -62,7 +62,7 @@ public class AgregarHotel extends HttpServlet {
 		System.out.println(hotelDTO.toString());
 		HotelControladorBS.getInstancia().crearHotel(hotelDTO);
 
-		this.getServletContext().getRequestDispatcher("./hoteles.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/hoteles.jsp").forward(request, response);
 	}
 
 	/**

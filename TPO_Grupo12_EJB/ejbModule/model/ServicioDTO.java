@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class ServicioDTO  implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = -7451111074491579417L;
 	
 	private int servicioId;
 	private int key;

@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.sun.istack.internal.Nullable;
 
@@ -29,23 +31,24 @@ public class Hotel implements Serializable{
 	private int hotelId;
 	
 	private String nombre;
-	
-	@ManyToOne
+
+	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private Direccion direccion;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Servicio> servicios;
 	
-	@OneToMany @JoinColumn(name="hotel")
+	@OneToMany(mappedBy="hotel") 
 	private List<Habitacion> habitaciones;
-	
-	@OneToMany
-	private List<MedioDePago> mediosDePago;
 	
 	@OneToMany @JoinColumn(name="hotel")
 	private List<Oferta> ofertas;
 	
 	private String imagen;
+
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<MedioDePago> mediosDePago;
+	
 	
 	public Hotel(){
 		

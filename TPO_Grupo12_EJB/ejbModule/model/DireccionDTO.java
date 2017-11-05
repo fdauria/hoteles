@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class DireccionDTO implements Serializable{
 
+	private static final long serialVersionUID = 4773069650450920845L;
+
 	private int direccionId;
 	private String direccion;
 	private String latitud;

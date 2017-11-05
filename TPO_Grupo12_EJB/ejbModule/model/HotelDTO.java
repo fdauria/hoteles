@@ -6,7 +6,8 @@ import java.util.List;
 import com.sun.istack.internal.Nullable;
 
 public class HotelDTO  implements Serializable{
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -829612922676097149L;
 
 	private int hotelId;
 	private String nombre;

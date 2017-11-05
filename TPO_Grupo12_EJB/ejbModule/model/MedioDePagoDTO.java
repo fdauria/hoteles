@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class MedioDePagoDTO  implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = -8803275465464835037L;
 	
 	private int medioDePagoId;
 	private String descripcion;
@@ -29,4 +30,5 @@ public class MedioDePagoDTO  implements Serializable{
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 }

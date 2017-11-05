@@ -20,12 +20,10 @@ public class MedioDePago implements Serializable{
 	private String descripcion;
 	
 	public MedioDePago() {
-		super();
 	}
 	
 	public MedioDePago(int medioDePagoId, String descripcion) {
 		super();
-		this.medioDePagoId = medioDePagoId;
 		this.descripcion = descripcion;
 	}
 	
@@ -45,6 +43,6 @@ public class MedioDePago implements Serializable{
 	public MedioDePagoDTO toDTO(){
 		return new MedioDePagoDTO(medioDePagoId, descripcion);
 	}
-	
+
 	
 }
