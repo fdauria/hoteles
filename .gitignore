@@ -1,3 +1,7 @@
-/build/
+*/build/
 *.class
 persistence.xml
+.DS_Store
+TPO_Grupo12_EJB/build/
+**/.DS_Store
+**/.class
