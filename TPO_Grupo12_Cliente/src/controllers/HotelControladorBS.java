@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -34,6 +36,10 @@ public class HotelControladorBS {
 
 	public void crearHotel(HotelDTO hotelDTO) {
 		controlador.agregarHotel(hotelDTO);
+	}
+
+	public List<HotelDTO> obtenerHoteles() {
+		return controlador.obtenerHoteles();
 	}
 
 }

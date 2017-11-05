@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html>
 <head>
 	<title>Oferta Hotelera | Integración de Aplicaciones</title>
@@ -31,9 +32,9 @@
 				<div class="form-group">
 				    <label for="hotel">Hotel</label>
 				    <select id="hotel" class="form-control" data-style="btn-primary" name="hotel">
-						<option value="1">Hotel1</option>
-						<option value="2">Hotel2</option>
-						<option value="3">Hotel3</option>
+					    <c:forEach items="${hoteles}" var="hotel">
+	    					<option value="${hotel.hotelId}">${hotel.nombre}</option>
+						</c:forEach>
 					</select>
 				    <small id="hotelHelp" class="form-text text-muted">Ingrese el hotel que va a tener esta oferta</small>
 				</div>

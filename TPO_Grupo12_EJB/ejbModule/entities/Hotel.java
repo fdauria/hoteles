@@ -40,7 +40,7 @@ public class Hotel implements Serializable{
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name="Hotel_Servicio", joinColumns={@JoinColumn(name="hotelId")}, inverseJoinColumns={@JoinColumn(name="servicioId")})
-	private List<Servicio> servicios;
+	private List<Servicio> servicios  = new ArrayList<Servicio>();
 	
 	@OneToMany(mappedBy="hotel") 
 	private List<Habitacion> habitaciones = new ArrayList<Habitacion>();	
@@ -49,7 +49,7 @@ public class Hotel implements Serializable{
 
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name="Hotel_MedioDePago", joinColumns={@JoinColumn(name="hotelId")}, inverseJoinColumns={@JoinColumn(name="medioDePagoId")})
-	private List<MedioDePago> mediosDePago;
+	private List<MedioDePago> mediosDePago  = new ArrayList<MedioDePago>();
 	
 	
 	public Hotel(){
