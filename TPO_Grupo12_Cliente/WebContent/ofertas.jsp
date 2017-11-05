@@ -74,6 +74,8 @@
 				</div>
 								
 				<button type="submit" class="btn btn-primary">Agregar Oferta</button>
+				<a href="./index.jsp" class="btn btn-primary">Volver</button>
+				
 			</form>
 		</div>
 	</div>
