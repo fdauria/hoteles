@@ -16,6 +16,7 @@ public class HotelDTO  implements Serializable{
 	private List<HabitacionDTO> habitaciones;
 	private List<MedioDePagoDTO> mediosDePago;
 	private String imagen;
+	private int backofficeId;
 	
 	public HotelDTO(int hotelId, String nombre, DireccionDTO direccion, List<ServicioDTO> servicios,
 			@Nullable List<HabitacionDTO> habitaciones, List<MedioDePagoDTO> mediosDePago, @Nullable String imagen) {
@@ -106,5 +107,17 @@ public class HotelDTO  implements Serializable{
 				+ ", servicios=" + servicios + ", habitaciones=" + habitaciones + ", mediosDePago="
 				+ mediosDePago + "]";
 	}
+	
+	public void setBackofficeId(int id){
+		this.backofficeId = id;
+	}
+
+	public int getBackofficeId() {
+		return backofficeId;
+	}
+	
+	
+	
+	
 
 }

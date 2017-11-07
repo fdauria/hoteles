@@ -60,6 +60,14 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public HotelDTO agregarHotel(HotelDTO hotelDTO) {
+		return saveEntity(hotelFromDTO(hotelDTO)).toDTO();
+	}
+	
+	public HotelDTO actualizarConIdBackoffice(HotelDTO hotelDTO){
+		return updateEntity(hotelFromDTO(hotelDTO)).toDTO();
+	}
+
+	public Hotel hotelFromDTO(HotelDTO hotelDTO){
 		Hotel hotel = new Hotel();
 		hotel.setImagen(hotelDTO.getImagen());
 		hotel.setNombre(hotelDTO.getNombre());
@@ -86,9 +94,9 @@ public class Manager implements ManagerRemote {
 		if(!medioDePagoList.isEmpty())
 			hotel.setMediosDePago(medioDePagoList);	
 		
-		return saveEntity(hotel).toDTO();
+		return hotel;
 	}
-
+	
 	@Override
 	public HotelDTO obtenerHotel(int id) {
 		return ((Hotel) getEntityManager().createQuery("from Hotel where id=" + id).getSingleResult()).toDTO();

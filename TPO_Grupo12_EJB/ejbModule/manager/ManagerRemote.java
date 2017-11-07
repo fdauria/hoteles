@@ -14,6 +14,8 @@ public interface ManagerRemote {
 	public List<HotelDTO> obtenerHoteles();
 
 	public HotelDTO agregarHotel(HotelDTO hotel);
+	
+	public HotelDTO actualizarConIdBackoffice(HotelDTO hotelDTO);
 
 	public HotelDTO obtenerHotel(int id);
 	

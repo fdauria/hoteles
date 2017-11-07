@@ -25,6 +25,10 @@ public class HabitacionDTO  implements Serializable{
 		this.servicios = servicios;
 	}
 
+	public HabitacionDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getHabitacionId() {
 		return habitacionId;
 	}

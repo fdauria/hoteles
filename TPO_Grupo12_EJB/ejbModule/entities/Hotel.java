@@ -51,6 +51,7 @@ public class Hotel implements Serializable{
 	@JoinTable(name="Hotel_MedioDePago", joinColumns={@JoinColumn(name="hotelId")}, inverseJoinColumns={@JoinColumn(name="medioDePagoId")})
 	private List<MedioDePago> mediosDePago  = new ArrayList<MedioDePago>();
 	
+	private int backofficeId;
 	
 	public Hotel(){
 		
@@ -121,12 +122,22 @@ public class Hotel implements Serializable{
 	public String getImagen(){
 		return this.imagen;
 	}
+	
+	public void setBackofficeId(int id){
+		this.backofficeId = id;
+	}
+	
+	public int getBackofficeId(){
+		return this.backofficeId;
+	}
 
 	public HotelDTO toDTO(){
 		final List<ServicioDTO> servicioDTOList 		= servicios.stream().map(servicio -> servicio.toDTO()).collect(Collectors.toList());
 		final List<HabitacionDTO> habitacionDTOList 	= habitaciones.stream().map(habitacion -> habitacion.toDTO()).collect(Collectors.toList());
 		final List<MedioDePagoDTO> medioDePagoDTOList 	= mediosDePago.stream().map(medioDePago -> medioDePago.toDTO()).collect(Collectors.toList());
 		
-		return new HotelDTO(hotelId, nombre, direccion.toDTO(), servicioDTOList,habitacionDTOList, medioDePagoDTOList, imagen);
+		HotelDTO hotelDTO =  new HotelDTO(hotelId, nombre, direccion.toDTO(), servicioDTOList,habitacionDTOList, medioDePagoDTOList, imagen);
+		hotelDTO.setBackofficeId(backofficeId);
+		return hotelDTO;
 	}
 }
