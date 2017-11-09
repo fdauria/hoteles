@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controllers.ControladorBS;
+
 @WebServlet("/AgregarOferta")
 public class AgregarOferta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -49,6 +51,10 @@ public class AgregarOferta extends HttpServlet {
 		 * System.out.println(hotelDTO.toString());
 		 * HotelControladorBS.getInstancia().crearHotel(hotelDTO);
 		 */
+
+		request.setAttribute("hoteles", ControladorBS.getInstancia().obtenerHoteles());
+		request.setAttribute("habitaciones", ControladorBS.getInstancia().obtenerHabitaciones());
+
 		this.getServletContext().getRequestDispatcher("./ofertas.jsp").forward(request, response);
 	}
 

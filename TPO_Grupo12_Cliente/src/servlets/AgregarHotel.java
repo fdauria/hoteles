@@ -72,11 +72,13 @@ public class AgregarHotel extends HttpServlet {
 		hotelDTO.setServicios(servicioDTOList);
 		hotelDTO.setMediosDePago(medioDePagoDTOList);
 
-		System.out.println(hotelDTO.toString());
 		HotelDTO nuevoHotelDTO = ControladorBS.getInstancia().agregarHotel(hotelDTO);
 
 		// if (request.getParameter("imagen") != null)
 		// agregarImagenHotel("imagen_" + nombre, request.getPart("file"));
+
+		request.setAttribute("servicios", ControladorBS.getInstancia().obtenerServiciosPorTipo(1));
+		request.setAttribute("mediosDePago", ControladorBS.getInstancia().obtenerMediosDePago());
 
 		this.getServletContext().getRequestDispatcher("/hoteles.jsp").forward(request, response);
 	}

@@ -30,8 +30,8 @@ public interface ManagerRemote {
 	public List<HabitacionDTO> obtenerHabitaciones();
 	
 	public HabitacionDTO obtenerHabitacion(int id);
-	
-	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion);
+		
+	public HabitacionDTO agregarHabitacion(HotelDTO hotelDTO, HabitacionDTO habitacionDTO);
 	
 	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo);
 	

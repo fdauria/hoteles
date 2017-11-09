@@ -30,6 +30,8 @@ public class AgregarHabitacion extends HttpServlet {
 		final HotelDTO hotelDTO = ControladorBS.getInstancia()
 				.obtenerHotel(Integer.parseInt(request.getParameter("hotel")));
 		final String tipo = request.getParameter("tipo");
+		final String nombre = request.getParameter("nombre");
+
 		final int capacidad = Integer.parseInt(request.getParameter("capacidad"));
 		final String descripcion = request.getParameter("descripcion");
 
@@ -46,13 +48,17 @@ public class AgregarHabitacion extends HttpServlet {
 		// agregarImagenHotel("imagen_" + nombre, request.getPart("file"));
 
 		HabitacionDTO habitacionDTO = new HabitacionDTO();
+		habitacionDTO.setNombre(nombre);
 		habitacionDTO.setCapacidad(capacidad);
 		habitacionDTO.setDescripcion(descripcion);
 		habitacionDTO.setHotel(hotelDTO);
 		habitacionDTO.setServicios(servicioDTOList);
 		habitacionDTO.setTipo(tipo);
 		// habitacionDTO.setImagen(imagen);
-		ControladorBS.getInstancia().agregarHabitacion(habitacionDTO);
+		ControladorBS.getInstancia().agregarHabitacion(hotelDTO, habitacionDTO);
+
+		request.setAttribute("servicios", ControladorBS.getInstancia().obtenerServiciosPorTipo(2));
+		request.setAttribute("hoteles", ControladorBS.getInstancia().obtenerHoteles());
 
 		request.getRequestDispatcher("/habitaciones.jsp").forward(request, response);
 

@@ -24,9 +24,6 @@
 				<div class="form-group">
 				    <label for="habitacion">Habitacion</label>
 				    <select id=habitacion class="form-control" data-style="btn-primary" name="habitacion">
-						<option value="1">Habitacion1</option>
-						<option value="2">Habitacion2</option>
-						<option value="3">Habitacion3</option>
 					</select>
 				    <small id="habitacionHelp" class="form-text text-muted">Ingrese la habitacion que va a tener esta oferta</small>
 				</div>
@@ -79,6 +76,21 @@
 				todayHighlight: true,
 				autoclose: true,
 			})
+
+			$('#hotel').change (
+	            function() {
+	            	$('#habitacion').html("");
+	                $.ajax({
+	                    type: "POST",
+	                    url: "ObtenerHabitacionesPorHotel",
+	                    data: {hotel: $('#hotel').attr("selectedIndex") },
+	                    success: function(data){
+	                    	$('#habitacion').html(data)
+	                    }
+	                });
+	            }
+	        );
+		
 		})
 	</script>
 	

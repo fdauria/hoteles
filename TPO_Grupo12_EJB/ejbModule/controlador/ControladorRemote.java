@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import entities.Habitacion;
 import model.HabitacionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
@@ -28,7 +29,7 @@ public interface ControladorRemote {
 	
 	public HabitacionDTO obtenerHabitacion(int id);
 	
-	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion);
+	public HabitacionDTO agregarHabitacion(HotelDTO hotelDTO, HabitacionDTO habitacionDTO);
 	
 	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo);
 	
@@ -37,5 +38,5 @@ public interface ControladorRemote {
 	public void cargarServicios();
 	
 	public void cargarMediosDePago();
-
+	
 }

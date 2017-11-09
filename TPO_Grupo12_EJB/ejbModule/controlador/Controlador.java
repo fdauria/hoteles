@@ -21,6 +21,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.google.gson.Gson;
 
+import entities.Habitacion;
 import integracion.LogBackOffice;
 import integracion.NuevoEstablecimientoJSON;
 import integracion.NuevoEstablecimientoResponse;
@@ -48,7 +49,7 @@ public class Controlador implements ControladorRemote {
 	@Override
 	public HotelDTO agregarHotel(HotelDTO hotel) {
 		final HotelDTO hotelDTO = interfazRemota.agregarHotel(hotel);
-		sendHotelToBackOffice(hotelDTO);
+		//sendHotelToBackOffice(hotelDTO);
 		return hotelDTO;
 	}
 	
@@ -282,8 +283,8 @@ public class Controlador implements ControladorRemote {
 	}
 
 	@Override
-	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion) {
-		return interfazRemota.agregarHabitacion(habitacion);
+	public HabitacionDTO agregarHabitacion(HotelDTO hotelDTO, HabitacionDTO habitacionDTO){
+		return interfazRemota.agregarHabitacion(hotelDTO, habitacionDTO);
 	}
 	
 	@Override
@@ -305,4 +306,5 @@ public class Controlador implements ControladorRemote {
 	public void cargarMediosDePago() {
 		interfazRemota.cargarMediosDePago();
 	}
+	
 }

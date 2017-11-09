@@ -26,12 +26,10 @@ public class Habitacion implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int habitacionId;
+	private String nombre;
 	private String descripcion;
 	private int capacidad;
 	private String tipo;
-	@ManyToOne
-	@JoinColumn (name="hotelId")
-	private Hotel hotel;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Habitacion_Servicio", 
@@ -45,10 +43,10 @@ public class Habitacion implements Serializable{
 			List<Servicio> servicios,Hotel hotel, String imagen) {
 		super();
 		this.habitacionId = habitacionId;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.capacidad = capacidad;
 		this.tipo = tipo;
-		this.hotel=hotel;
 		this.servicios = servicios;
 		this.imagen = imagen;
 	}
@@ -105,17 +103,18 @@ public class Habitacion implements Serializable{
 		this.servicios = servicios;
 	}
 	
+	
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public HabitacionDTO toDTO(){
 		List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
-		return new HabitacionDTO(habitacionId, descripcion, capacidad, tipo, servicioDTOList,hotel.toDTO(), imagen);
+		return new HabitacionDTO(habitacionId, nombre, descripcion, capacidad, tipo, servicioDTOList, imagen);
 	}
-
-	public Hotel getHotel() {
-		return hotel;
-	}
-
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
-	}
-
 }

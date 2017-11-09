@@ -117,8 +117,13 @@ public class Manager implements ManagerRemote {
 	}
 
 	@Override
-	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion) {
-		return saveEntity(habitacionFromDTO(habitacion)).toDTO();
+	public HabitacionDTO agregarHabitacion(HotelDTO hotelDTO, HabitacionDTO habitacionDTO) {
+		Hotel hotel = hotelFromDTO(hotelDTO);
+		Habitacion habitacion = habitacionFromDTO(habitacionDTO);
+		hotel.getHabitaciones().add(habitacion);
+		updateEntity(hotel);
+		
+		return habitacion.toDTO();
 	}
 	
 	
@@ -177,9 +182,7 @@ public class Manager implements ManagerRemote {
 		
 		if(!servicios.isEmpty())
 			habitacion.setServicios(servicios);
-		
-		habitacion.setHotel(hotelFromDTO(habitacionDTO.getHotel()));
-		
+				
 		if(habitacionDTO.getHabitacionId() != 0) 
 			habitacion.setHabitacionId(habitacionDTO.getHabitacionId());
 		

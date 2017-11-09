@@ -78,8 +78,8 @@ public class ControladorBS implements ControladorRemote {
 	}
 
 	@Override
-	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion) {
-		return controlador.agregarHabitacion(habitacion);
+	public HabitacionDTO agregarHabitacion(HotelDTO hotelDTO, HabitacionDTO habitacionDTO) {
+		return controlador.agregarHabitacion(hotelDTO, habitacionDTO);
 	}
 
 	@Override

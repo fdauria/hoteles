@@ -3,7 +3,6 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -45,12 +44,12 @@ public class Hotel implements Serializable{
 	    inverseJoinColumns = {@JoinColumn(name = "servicioId")})
 	private List<Servicio> servicios  = new ArrayList<Servicio>();
 	
-	@OneToMany(mappedBy="hotel") 
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="hotelId")
 	private List<Habitacion> habitaciones = new ArrayList<Habitacion>();	
 	
 	private String imagen;
 
-	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Hotel_MedioDePago", 
 	    joinColumns = {@JoinColumn(name = "hotelId")},
@@ -138,11 +137,21 @@ public class Hotel implements Serializable{
 	}
 
 	public HotelDTO toDTO(){
-		final List<ServicioDTO> servicioDTOList 		= servicios.stream().map(servicio -> servicio.toDTO()).collect(Collectors.toList());
-		final List<HabitacionDTO> habitacionDTOList 	= habitaciones.stream().map(habitacion -> habitacion.toDTO()).collect(Collectors.toList());
-		final List<MedioDePagoDTO> medioDePagoDTOList 	= mediosDePago.stream().map(medioDePago -> medioDePago.toDTO()).collect(Collectors.toList());
+
+		final List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
+		final List<HabitacionDTO> habitacionDTOList = new ArrayList<HabitacionDTO>();
+		final List<MedioDePagoDTO> medioDePagoDTOList = new ArrayList<MedioDePagoDTO>();
 		
-		HotelDTO hotelDTO =  new HotelDTO(hotelId, nombre, direccion.toDTO(), servicioDTOList,habitacionDTOList, medioDePagoDTOList, imagen);
+		for(final Servicio servicio : servicios)
+			servicioDTOList.add(servicio.toDTO());
+	
+		for(final Habitacion habitacion : habitaciones)
+			habitacionDTOList.add(habitacion.toDTO());
+		
+		for(final MedioDePago medioDePago : mediosDePago)
+			medioDePagoDTOList.add(medioDePago.toDTO());
+		
+		HotelDTO hotelDTO =  new HotelDTO(hotelId, nombre, direccion.toDTO(), servicioDTOList, habitacionDTOList, medioDePagoDTOList, imagen);
 		hotelDTO.setBackofficeId(backofficeId);
 		return hotelDTO;
 	}

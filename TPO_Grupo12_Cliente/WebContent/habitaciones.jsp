@@ -22,6 +22,11 @@
 				</div>
 
 				<div class="form-group">
+					<label for="nombre">Nombre</label>
+				    <input type="text" class="form-control" id="nombre" name="nombre">
+				</div>
+
+				<div class="form-group">
 					<label for="tipo">Tipo</label>
 				    <input type="text" class="form-control" id="tipo" name="tipo">
 				</div>

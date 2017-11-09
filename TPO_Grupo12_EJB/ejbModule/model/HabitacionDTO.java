@@ -8,6 +8,7 @@ public class HabitacionDTO  implements Serializable{
 	private static final long serialVersionUID = 8523919109478097588L;
 	
 	private int habitacionId;
+	private String nombre;
 	private String descripcion;
 	private int capacidad;
 	private String tipo;
@@ -15,14 +16,13 @@ public class HabitacionDTO  implements Serializable{
 	private HotelDTO hotel;
 	private String imagen;
 
-	public HabitacionDTO(int habitacionId, String descripcion, int capacidad, String tipo,
-			List<ServicioDTO> servicios, HotelDTO hotelDTO, String imagen) {
+	public HabitacionDTO(int habitacionId, String nombre, String descripcion, int capacidad, String tipo, List<ServicioDTO> servicios, String imagen) {
 		super();
 		this.habitacionId = habitacionId;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.capacidad = capacidad;
 		this.tipo = tipo;
-		this.setHotel(hotelDTO);
 		this.servicios = servicios;
 		this.imagen = imagen;
 	}
@@ -88,4 +88,11 @@ public class HabitacionDTO  implements Serializable{
 		this.hotel = hotel;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 }
