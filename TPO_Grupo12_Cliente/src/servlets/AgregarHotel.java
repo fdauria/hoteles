@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controllers.HotelControladorBS;
+import controllers.ControladorBS;
 import model.DireccionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
@@ -60,7 +60,7 @@ public class AgregarHotel extends HttpServlet {
 		hotelDTO.setMediosDePago(medioDePagoDTOList);
 
 		System.out.println(hotelDTO.toString());
-		HotelControladorBS.getInstancia().crearHotel(hotelDTO);
+		ControladorBS.getInstancia().agregarHotel(hotelDTO);
 
 		this.getServletContext().getRequestDispatcher("/hoteles.jsp").forward(request, response);
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import model.HabitacionDTO;
 import model.HotelDTO;
 import model.OfertaDTO;
 
@@ -21,5 +22,9 @@ public interface ControladorRemote {
 
 	public OfertaDTO obtenerOferta(int id);
 	
-	public String hello(String name);
+	public List<HabitacionDTO> obtenerHabitaciones();
+	
+	public HabitacionDTO obtenerHabitacion(int id);
+	
+	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion);
 }

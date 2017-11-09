@@ -9,17 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/AgregarOferta")
-public class AgregarOferta extends HttpServlet {
+public class AgregarHabitacion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public AgregarOferta() {
+	public AgregarHabitacion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		/*
 		 * String nombre = request.getParameter("nombre"); String
 		 * direccionNombre = request.getParameter("direccionNombre"); String
@@ -49,7 +48,8 @@ public class AgregarOferta extends HttpServlet {
 		 * System.out.println(hotelDTO.toString());
 		 * HotelControladorBS.getInstancia().crearHotel(hotelDTO);
 		 */
-		this.getServletContext().getRequestDispatcher("./ofertas.jsp").forward(request, response);
+
+		this.getServletContext().getRequestDispatcher("./habitaciones.jsp").forward(request, response);
 	}
 
 	/**

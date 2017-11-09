@@ -1,17 +1,8 @@
 package controlador;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -20,54 +11,48 @@ import javax.ejb.Stateless;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
-import javax.jms.JMSContext;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.ws.rs.core.Response;
 
-import org.apache.activemq.artemis.utils.json.JSONObject;
+import org.apache.commons.io.IOUtils;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import integracion.LogBackOffice;
 import integracion.NuevoEstablecimientoJSON;
 import integracion.NuevoEstablecimientoResponse;
-import integracion.OfertaJMS;
 import manager.ManagerRemote;
 import model.HabitacionDTO;
 import model.HotelDTO;
 import model.OfertaDTO;
 
-import org.apache.commons.io.IOUtils;
-
 @Stateless
 public class Controlador implements ControladorRemote {
 
 	@EJB
-	private ManagerRemote inferfazRemota;
+	private ManagerRemote interfazRemota;
 
 	public Controlador() {
 	}
 	
 	@Override
 	public List<HotelDTO> obtenerHoteles() {
-		return inferfazRemota.obtenerHoteles();
+		return interfazRemota.obtenerHoteles();
 	}
 
 	@Override
 	public HotelDTO agregarHotel(HotelDTO hotel) {
-		final HotelDTO hotelDTO = inferfazRemota.agregarHotel(hotel);
-		
+		final HotelDTO hotelDTO = interfazRemota.agregarHotel(hotel);
+		sendHotelToBackOffice(hotelDTO);
+		return hotelDTO;
+	}
+	
+	private void sendHotelToBackOffice(HotelDTO hotelDTO){
 		URL url;
 		try {
-			toJMS();
-			//MANDAR LOG QUE VAMOS A MANDAR UN HOTEL
-			/*
 			toLog(new LogBackOffice("OH", "BO", "Crear establecimiento", "INFO"));
 			
 			url = new URL("http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/EnviarSolicitud");
@@ -79,17 +64,16 @@ public class Controlador implements ControladorRemote {
 			IOUtils.write(new Gson().toJson(new NuevoEstablecimientoJSON("Hotelera", hotelDTO.getNombre())), urlConnection.getOutputStream());
 			NuevoEstablecimientoResponse response = new Gson().fromJson(IOUtils.toString(urlConnection.getInputStream()), NuevoEstablecimientoResponse.class);
 			hotelDTO.setBackofficeId(response.getId());
+			
 			//REVISAR QUE PERSISTA EL ID DEL BACKOFFICE
-			inferfazRemota.actualizarConIdBackoffice(hotelDTO);	*/
+			interfazRemota.actualizarConIdBackoffice(hotelDTO);
 		} catch (Exception e) {
-			/*try {
+			try {
 				toLog(new LogBackOffice("OH", "BO", "Crear establecimiento", "ERROR : " + e.getMessage()));
 			} catch (IOException e1) {
 				System.out.println("Fallo al enviar el establecimiento --> Error de conexion");
-			}*/
+			}
 		}
-		
-		return hotelDTO;
 	}
 	
 	public void toLog(LogBackOffice log) throws IOException{
@@ -103,52 +87,42 @@ public class Controlador implements ControladorRemote {
 		IOUtils.write(new Gson().toJson(log), urlConnection.getOutputStream());
 	}
 	
-	public void toJMS() throws Exception{
-		
-		
+	public void ofertaToJMS() throws Exception{
 		Context context;
 		try 
 		{
 		    final Properties env = new Properties();
-		            env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-		            env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "http-remoting://192.168.0.101:8080"));
-		            env.put(Context.SECURITY_PRINCIPAL, System.getProperty("username", "paquete"));
-		            env.put(Context.SECURITY_CREDENTIALS, System.getProperty("password", "paquete"));
-		            context = new InitialContext(env);
-		 
-		            // Perform the JNDI lookups
-		            String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");
-		            ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
-		 
-		            String destinationString = System.getProperty("destination", "jms/queue/ofertapaquete");
-		            Destination destination = (Destination) context.lookup(destinationString);
-		 
-		            // Create the JMS connection, session, producer, and consumer
-		            Connection connection = connectionFactory.createConnection(System.getProperty("username", "paquete"), System.getProperty("password", "paquete"));
-		            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		           // consumer = session.createConsumer(destination);
-		            connection.start();
-		// crear un producer para enviar mensajes usando la session
-		MessageProducer producer = session.createProducer(destination);
-		// crear un mensaje de tipo text y setearle el contenido
-		TextMessage message = session.createTextMessage();
-		message.setText("hola");
-		// enviar el mensaje
-		producer.send(message);
-		// TODO: recordar cerrar la session y la connection en un bloque “finally”
-		connection.close();
-		} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+            env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "http-remoting://192.168.0.101:8080"));
+            env.put(Context.SECURITY_PRINCIPAL, System.getProperty("username", "paquete"));
+            env.put(Context.SECURITY_CREDENTIALS, System.getProperty("password", "paquete"));
+            context = new InitialContext(env);
+ 
+            // Perform the JNDI lookups
+            String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");
+            ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
+ 
+            String destinationString = System.getProperty("destination", "jms/queue/ofertapaquete");
+            Destination destination = (Destination) context.lookup(destinationString);
+ 
+            // Create the JMS connection, session, producer, and consumer
+            Connection connection = connectionFactory.createConnection(System.getProperty("username", "paquete"), System.getProperty("password", "paquete"));
+            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+           // consumer = session.createConsumer(destination);
+            connection.start();
+			// crear un producer para enviar mensajes usando la session
+			MessageProducer producer = session.createProducer(destination);
+			// crear un mensaje de tipo text y setearle el contenido
+			TextMessage message = session.createTextMessage();
+			message.setText("hola");
+			// enviar el mensaje
+			producer.send(message);
+			// TODO: recordar cerrar la session y la connection en un bloque “finally”
+			connection.close();
+			} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		/*Context namingContext = null;
         JMSContext jmsContext = null;
@@ -272,31 +246,41 @@ public class Controlador implements ControladorRemote {
             }
         }
     
-*/
+		 */
 	}
 
 	@Override
 	public HotelDTO obtenerHotel(int id) {
-		return inferfazRemota.obtenerHotel(id);
+		return interfazRemota.obtenerHotel(id);
 	}
 
 	@Override
-	public String hello(String name) {
-		return "Hello " + name;
-	}
-	
-	@Override
 	public List<OfertaDTO> obtenerOfertas() {
-		return inferfazRemota.obtenerOfertas();
+		return interfazRemota.obtenerOfertas();
 	}
 
 	@Override
 	public OfertaDTO agregarOferta(OfertaDTO oferta) {
-		return inferfazRemota.agregarOferta(oferta);
+		return interfazRemota.agregarOferta(oferta);
 	}
 
 	@Override
 	public OfertaDTO obtenerOferta(int id) {
-		return inferfazRemota.obtenerOferta(id);
+		return interfazRemota.obtenerOferta(id);
+	}
+
+	@Override
+	public List<HabitacionDTO> obtenerHabitaciones() {
+		return interfazRemota.obtenerHabitaciones();
+	}
+
+	@Override
+	public HabitacionDTO obtenerHabitacion(int id) {
+		return interfazRemota.obtenerHabitacion(id);
+	}
+
+	@Override
+	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion) {
+		return interfazRemota.agregarHabitacion(habitacion);
 	}
 }

@@ -15,13 +15,14 @@ public class OfertaDTO  implements Serializable{
 	private HabitacionDTO habitacion;
 	private String politicaCancelacion;
 	private HotelDTO hotel;
+	private int cupo;
 
 	public OfertaDTO() {
 
 	}
 
 	public OfertaDTO(int ofertaId, Date fechaDesde, Date fechaHasta, float price, HabitacionDTO habitacion,
-			String politicaCancelacion, HotelDTO hotelDTO) {
+			String politicaCancelacion, HotelDTO hotelDTO, int cupo) {
 		super();
 		this.ofertaId = ofertaId;
 		this.fechaDesde = fechaDesde;
@@ -30,6 +31,19 @@ public class OfertaDTO  implements Serializable{
 		this.habitacion = habitacion;
 		this.politicaCancelacion = politicaCancelacion;
 		this.setHotel(hotelDTO);
+		this.cupo = cupo;
+	}
+	
+	public int getCupo() {
+		return cupo;
+	}
+
+	public void setCupo(int cupo) {
+		this.cupo = cupo;
+	}
+
+	public Date getFechaDesde() {
+		return fechaDesde;
 	}
 
 	public int getOfertaId() {

@@ -34,12 +34,14 @@ public class Oferta implements Serializable{
 	
 	private String politicaCancelacion;
 
+	private int cupo;
+	
 	public Oferta() {
 
 	}
 
 	public Oferta(int ofertaId, Date fechaDesde, Date fechaHasta, float price, Hotel hotel, Habitacion habitacion,
-			String politicaCancelacion) {
+			String politicaCancelacion, int cupo) {
 		super();
 		this.ofertaId = ofertaId;
 		this.fechaDesde = fechaDesde;
@@ -48,6 +50,19 @@ public class Oferta implements Serializable{
 		this.hotel=hotel;
 		this.habitacion = habitacion;
 		this.politicaCancelacion = politicaCancelacion;
+		this.cupo = cupo;
+	}
+	
+	public int getCupo() {
+		return cupo;
+	}
+
+	public void setCupo(int cupo) {
+		this.cupo = cupo;
+	}
+
+	public Date getFechaDesde() {
+		return fechaDesde;
 	}
 
 	public int getOfertaId() {
@@ -99,7 +114,7 @@ public class Oferta implements Serializable{
 	}
 	
 	public OfertaDTO toDTO(){
-		return new OfertaDTO(ofertaId, fechaDesde, fechaHasta, price, habitacion.toDTO(), politicaCancelacion,hotel.toDTO());
+		return new OfertaDTO(ofertaId, fechaDesde, fechaHasta, price, habitacion.toDTO(), politicaCancelacion,hotel.toDTO(), cupo);
 	}
 
 	public Hotel getHotel() {

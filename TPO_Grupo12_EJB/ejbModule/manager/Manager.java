@@ -9,10 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import entities.Direccion;
+import entities.Habitacion;
 import entities.Hotel;
 import entities.MedioDePago;
 import entities.Oferta;
 import entities.Servicio;
+import model.HabitacionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
 import model.OfertaDTO;
@@ -66,11 +68,57 @@ public class Manager implements ManagerRemote {
 	public HotelDTO actualizarConIdBackoffice(HotelDTO hotelDTO){
 		return updateEntity(hotelFromDTO(hotelDTO)).toDTO();
 	}
+	
+	@Override
+	public HotelDTO obtenerHotel(int id) {
+		return ((Hotel) getEntityManager().createQuery("from Hotel where id=" + id).getSingleResult()).toDTO();
+	}
 
+	@Override
+	public List<OfertaDTO> obtenerOfertas() {
+		return getAll(Oferta.class, "Oferta").stream().map(x -> x.toDTO()).collect(Collectors.toList());
+	}
+
+	@Override
+	public OfertaDTO agregarOferta(OfertaDTO oferta) {
+		return saveEntity(oferta);
+	}
+
+	@Override
+	public OfertaDTO obtenerOferta(int id) {
+		return ((Oferta) getEntityManager().createQuery("from Oferta where id=" + id).getSingleResult()).toDTO();
+	}
+	
+	@Override
+	public List<HabitacionDTO> obtenerHabitaciones() {
+		return getAll(Habitacion.class, "Habitacion").stream().map(x -> x.toDTO()).collect(Collectors.toList());
+	}
+
+	@Override
+	public HabitacionDTO obtenerHabitacion(int id) {
+		return ((Habitacion) getEntityManager().createQuery("from Habitacion where id=" + id).getSingleResult()).toDTO();
+
+	}
+
+	@Override
+	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion) {
+		return saveEntity(habitacionFromDTO(habitacion)).toDTO();
+	}
+	
+	
+	
+	
+	
+	
+	
 	public Hotel hotelFromDTO(HotelDTO hotelDTO){
-		Hotel hotel = new Hotel();
+		final Hotel hotel = new Hotel();
 		hotel.setImagen(hotelDTO.getImagen());
 		hotel.setNombre(hotelDTO.getNombre());
+		
+		if(hotelDTO.getHotelId() != 0){
+			hotel.setHotelId(hotelDTO.getHotelId());
+		}
 		
 		if(hotelDTO.getDireccion() != null){
 			Direccion direccion = new Direccion();
@@ -94,28 +142,43 @@ public class Manager implements ManagerRemote {
 		if(!medioDePagoList.isEmpty())
 			hotel.setMediosDePago(medioDePagoList);	
 		
+		hotel.setBackofficeId(hotelDTO.getBackofficeId());
+		
 		return hotel;
 	}
 	
-	@Override
-	public HotelDTO obtenerHotel(int id) {
-		return ((Hotel) getEntityManager().createQuery("from Hotel where id=" + id).getSingleResult()).toDTO();
+	public Oferta ofertaFromDTO(OfertaDTO ofertaDTO){
+		final Oferta oferta = new Oferta();
+		oferta.setFechaDesde(ofertaDTO.getFechadDesde());
+		oferta.setFechaHasta(ofertaDTO.getFechaHasta());
+		oferta.setCupo(ofertaDTO.getCupo());
+		oferta.setPrice(ofertaDTO.getPrice());
+		oferta.setPoliticaCancelacion(ofertaDTO.getPoliticaCancelacion());
+		oferta.setHotel(hotelFromDTO(ofertaDTO.getHotel()));
+		oferta.setHabitacion(habitacionFromDTO(ofertaDTO.getHabitacion()));
+		
+		return oferta;
 	}
-
-	@Override
-	public List<OfertaDTO> obtenerOfertas() {
-		return getAll(Oferta.class, "Oferta").stream().map(x -> x.toDTO()).collect(Collectors.toList());
-	}
-
-	@Override
-	public OfertaDTO agregarOferta(OfertaDTO oferta) {
-		return saveEntity(oferta);
-
-	}
-
-	@Override
-	public OfertaDTO obtenerOferta(int id) {
-		return ((Oferta) getEntityManager().createQuery("from Oferta where id=" + id).getSingleResult()).toDTO();
+	
+	public Habitacion habitacionFromDTO(HabitacionDTO habitacionDTO){
+		final Habitacion habitacion = new Habitacion();
+		habitacion.setCapacidad(habitacionDTO.getCapacidad());
+		habitacion.setDescripcion(habitacionDTO.getDescripcion());
+		habitacion.setTipo(habitacionDTO.getTipo());
+		habitacion.setImagen(habitacionDTO.getImagen());
+		
+		final List<Servicio> servicios = new ArrayList<>();
+		for(final ServicioDTO servicioDTO : habitacionDTO.getServicios())
+			servicios.add(new Servicio(servicioDTO.getServicioId(), servicioDTO.getDescripcion()));
+		
+		if(!servicios.isEmpty())
+			habitacion.setServicios(servicios);
+		
+		habitacion.setHotel(hotelFromDTO(habitacionDTO.getHotel()));
+		if(habitacionDTO.getHabitacionId() != 0) 
+			habitacion.setHabitacionId(habitacionDTO.getHabitacionId());
+		
+		return habitacion;
 	}
 
 	

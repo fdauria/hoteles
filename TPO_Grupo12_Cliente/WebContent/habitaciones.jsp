@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>Oferta Hotelera | Integración de Aplicaciones</title>
+	<title>Oferta Hotelera | Integracion de Aplicaciones</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible">
@@ -26,27 +26,26 @@
 		</header>
 		
 		<div style="margin-top: 10px;">
-			<form action="AgregarHotel" method="POST" class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
+			<form action="AgregarHabitacion" method="POST" class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
 				<div class="form-group">
-					<label for="nombre">Nombre</label>
-				    <input type="nombre" class="form-control" id="nombre" name="nombre">
-				    <small id="nombrehelp" class="form-text text-muted">Ingrese el nombre del establecimiento</small>
+					<label for="hotel">Hotel</label>
+				    <input type="text" class="form-control" id="hotel" name="hotel" value="${hotel.nombre}" disabled>
+				    <small id="hotelHelp" class="form-text text-muted">Se agregara una habitacion al hotel seleccionado</small>
+				</div>
+
+				<div class="form-group">
+					<label for="tipo">Tipo</label>
+				    <input type="text" class="form-control" id="tipo" name="tipo">
+				</div>
+
+				<div class="form-group">
+					<label for="capacidad">Capacidad</label>
+				    <input type="text" class="form-control" id="capacidad" name="capacidad">
 				</div>
 				
 				<div class="form-group">
-					<label for="direccion">Direccion</label>
-				    <input type="direccionNombre" class="form-control" id="direccionNombre" name="direccionNombre">
-				    <small id="direccionNombre" class="form-text text-muted">Ingrese la direccion</small>
-				</div>
-				
-				<div class="form-group">
-					<label for="direccionLatitude">Latitude</label>
-				    <input type="direccionLatitude" class="form-control" id="direccionLatitude" name="direccionLatitude">
-				</div>
-				
-				<div class="form-group">
-					<label for="direccionLongitud">Longitud</label>
-				    <input type="direccionLongitud" class="form-control" id="direccionLongitud" name="direccionLongitud">
+					<label for="descripcion">Descripcion</label>
+					<textarea class="form-control" rows="5" id="descripcion" name=""descripcion""></textarea>
 				</div>
 				
 				<div class="form-group">
@@ -55,15 +54,6 @@
 						<option value="1:Gym">Gym</option>
 						<option value="2:Sauna">Sauna</option>
 						<option value="3:Pileta">Pileta</option>
-					</select>
-				</div>
-				
-				<div class="form-group">
-				    <label for="mediosDePago">Medios de pago</label>
-				    <select id="mediosDePago" class="form-control" multiple data-style="btn-primary" name="mediosDePago">
-						<option value="1:VISA">VISA</option>
-						<option value="2:MASTER">MASTER</option>
-						<option value="3:AMEX">AMEX</option>
 					</select>
 				</div>
 				

@@ -34,9 +34,11 @@ public class Habitacion implements Serializable{
 	@OneToMany
 	@JoinTable(name="Habitacion_Servicio", joinColumns={@JoinColumn(name="habitacionId")}, inverseJoinColumns={@JoinColumn(name="servicioId")})
 	private List<Servicio> servicios;
+	
+	private String imagen;
 
 	public Habitacion(int habitacionId, String descripcion, int capacidad, String tipo,
-			List<Servicio> servicios,Hotel hotel) {
+			List<Servicio> servicios,Hotel hotel, String imagen) {
 		super();
 		this.habitacionId = habitacionId;
 		this.descripcion = descripcion;
@@ -44,6 +46,19 @@ public class Habitacion implements Serializable{
 		this.tipo = tipo;
 		this.hotel=hotel;
 		this.servicios = servicios;
+		this.imagen = imagen;
+	}
+
+	public Habitacion() {
+		
+	}
+	
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	public int getHabitacionId() {
@@ -88,7 +103,7 @@ public class Habitacion implements Serializable{
 	
 	public HabitacionDTO toDTO(){
 		List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
-		return new HabitacionDTO(habitacionId, descripcion, capacidad, tipo, servicioDTOList,hotel.toDTO());
+		return new HabitacionDTO(habitacionId, descripcion, capacidad, tipo, servicioDTOList,hotel.toDTO(), imagen);
 	}
 
 	public Hotel getHotel() {

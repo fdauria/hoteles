@@ -13,9 +13,10 @@ public class HabitacionDTO  implements Serializable{
 	private String tipo;
 	private List<ServicioDTO> servicios;
 	private HotelDTO hotel;
+	private String imagen;
 
 	public HabitacionDTO(int habitacionId, String descripcion, int capacidad, String tipo,
-			List<ServicioDTO> servicios, HotelDTO hotelDTO) {
+			List<ServicioDTO> servicios, HotelDTO hotelDTO, String imagen) {
 		super();
 		this.habitacionId = habitacionId;
 		this.descripcion = descripcion;
@@ -23,10 +24,19 @@ public class HabitacionDTO  implements Serializable{
 		this.tipo = tipo;
 		this.setHotel(hotelDTO);
 		this.servicios = servicios;
+		this.imagen = imagen;
 	}
 
 	public HabitacionDTO() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	public int getHabitacionId() {

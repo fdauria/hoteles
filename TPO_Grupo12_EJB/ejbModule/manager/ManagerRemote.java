@@ -2,9 +2,9 @@ package manager;
 
 import java.util.List;
 
-import javax.ejb.Local;
 import javax.ejb.Remote;
 
+import model.HabitacionDTO;
 import model.HotelDTO;
 import model.OfertaDTO;
 
@@ -24,4 +24,10 @@ public interface ManagerRemote {
 	public OfertaDTO agregarOferta(OfertaDTO oferta);
 
 	public OfertaDTO obtenerOferta(int id);
+	
+	public List<HabitacionDTO> obtenerHabitaciones();
+	
+	public HabitacionDTO obtenerHabitacion(int id);
+	
+	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion);
 }
