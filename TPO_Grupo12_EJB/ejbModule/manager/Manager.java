@@ -71,7 +71,7 @@ public class Manager implements ManagerRemote {
 	
 	@Override
 	public HotelDTO obtenerHotel(int id) {
-		return ((Hotel) getEntityManager().createQuery("from Hotel where id=" + id).getSingleResult()).toDTO();
+		return ((Hotel) getEntityManager().createQuery("from Hotel where hotelId=" + id).getSingleResult()).toDTO();
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public OfertaDTO obtenerOferta(int id) {
-		return ((Oferta) getEntityManager().createQuery("from Oferta where id=" + id).getSingleResult()).toDTO();
+		return ((Oferta) getEntityManager().createQuery("from Oferta where ofertaId=" + id).getSingleResult()).toDTO();
 	}
 	
 	@Override
@@ -96,8 +96,7 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public HabitacionDTO obtenerHabitacion(int id) {
-		return ((Habitacion) getEntityManager().createQuery("from Habitacion where id=" + id).getSingleResult()).toDTO();
-
+		return ((Habitacion) getEntityManager().createQuery("from Habitacion where habitacionId=" + id).getSingleResult()).toDTO();
 	}
 
 	@Override
@@ -130,14 +129,14 @@ public class Manager implements ManagerRemote {
 		
 		final List<Servicio> servicios = new ArrayList<>();
 		for(final ServicioDTO servicioDTO : hotelDTO.getServicios())
-			servicios.add(new Servicio(servicioDTO.getServicioId(), servicioDTO.getDescripcion()));
+			servicios.add(obtenerServicio(servicioDTO.getServicioId()));
 		
 		if(!servicios.isEmpty())
 			hotel.setServicios(servicios);
 		
 		final List<MedioDePago> medioDePagoList = new ArrayList<>();
 		for(final MedioDePagoDTO medioDePagoDTO : hotelDTO.getMediosDePago())
-			medioDePagoList.add(new MedioDePago(medioDePagoDTO.getMedioDePagoId(), medioDePagoDTO.getDescripcion()));
+			medioDePagoList.add(obtenerMedioDePago(medioDePagoDTO.getMedioDePagoId()));
 		
 		if(!medioDePagoList.isEmpty())
 			hotel.setMediosDePago(medioDePagoList);	
@@ -168,18 +167,61 @@ public class Manager implements ManagerRemote {
 		habitacion.setImagen(habitacionDTO.getImagen());
 		
 		final List<Servicio> servicios = new ArrayList<>();
-		for(final ServicioDTO servicioDTO : habitacionDTO.getServicios())
-			servicios.add(new Servicio(servicioDTO.getServicioId(), servicioDTO.getDescripcion()));
+		for(final ServicioDTO servicioDTO : habitacionDTO.getServicios()){
+			servicios.add(obtenerServicio(servicioDTO.getServicioId()));
+		}
 		
 		if(!servicios.isEmpty())
 			habitacion.setServicios(servicios);
 		
 		habitacion.setHotel(hotelFromDTO(habitacionDTO.getHotel()));
+		
 		if(habitacionDTO.getHabitacionId() != 0) 
 			habitacion.setHabitacionId(habitacionDTO.getHabitacionId());
 		
 		return habitacion;
 	}
-
 	
+	private Servicio obtenerServicio(int id) {
+		return ((Servicio) getEntityManager().createQuery("from Servicio where servicioId=" + id).getSingleResult());
+	}
+	
+	private MedioDePago obtenerMedioDePago(int id) {
+		return ((MedioDePago) getEntityManager().createQuery("from MedioDePago where medioDePagoId=" + id).getSingleResult());
+	}
+	
+	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo){
+		return getAll(Servicio.class, "Servicio").stream().filter(servicio -> servicio.getTipo() == tipo).map(x -> x.toDTO()).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<MedioDePagoDTO> obtenerMediosDePago() {
+		return getAll(MedioDePago.class, "MedioDePago").stream().map(x -> x.toDTO()).collect(Collectors.toList());
+	}
+
+	@Override
+	public void cargarServicios() {
+		saveEntity(new Servicio(1, "Estacionamiento"));
+		saveEntity(new Servicio(1, "Wifi"));
+		saveEntity(new Servicio(1, "Desayuno"));
+		saveEntity(new Servicio(1, "Media pension"));
+		saveEntity(new Servicio(1, "Picina"));
+		saveEntity(new Servicio(1, "Cancha de golf"));
+
+		saveEntity(new Servicio(2, "Televisor"));
+		saveEntity(new Servicio(2, "Jacuzi"));
+		saveEntity(new Servicio(2, "Aire acondicionado"));
+		saveEntity(new Servicio(2, "Parrilla"));
+		saveEntity(new Servicio(2, "Lavarropas"));
+		saveEntity(new Servicio(2, "Microondas"));	
+	}
+
+	@Override
+	public void cargarMediosDePago() {
+		saveEntity(new MedioDePago(1, "VISA"));
+		saveEntity(new MedioDePago(1, "AMEX"));
+		saveEntity(new MedioDePago(1, "MASTER"));
+		saveEntity(new MedioDePago(1, "Mercado Pago"));
+		saveEntity(new MedioDePago(1, "Efectivo"));
+	}
 }

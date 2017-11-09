@@ -6,7 +6,9 @@ import javax.ejb.Remote;
 
 import model.HabitacionDTO;
 import model.HotelDTO;
+import model.MedioDePagoDTO;
 import model.OfertaDTO;
+import model.ServicioDTO;
 
 @Remote
 public interface ManagerRemote {
@@ -30,4 +32,14 @@ public interface ManagerRemote {
 	public HabitacionDTO obtenerHabitacion(int id);
 	
 	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion);
+	
+	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo);
+	
+	public List<MedioDePagoDTO> obtenerMediosDePago();
+
+	public void cargarServicios();
+	
+	public void cargarMediosDePago();
+
+
 }

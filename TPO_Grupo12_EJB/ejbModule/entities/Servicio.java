@@ -17,24 +17,30 @@ public class Servicio implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int servicioId;
-	
-	private int clave;
+	private int tipo;
 	private String descripcion;
 
 	public Servicio() {
 
 	}
 
-	public Servicio(int clave, String descripcion) {
+	public Servicio(int tipo, String descripcion) {
 		super();
-		this.clave = clave;
 		this.descripcion = descripcion;
+		this.tipo = tipo;
 	}
 	
 	public int getServicioId() {
 		return servicioId;
 	}
-	
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
 
 	public void setServicioId(int servicioId) {
 		this.servicioId = servicioId;
@@ -49,14 +55,7 @@ public class Servicio implements Serializable{
 	}
 
 	public ServicioDTO toDTO(){
-		return new ServicioDTO(servicioId, clave, descripcion);
+		return new ServicioDTO(servicioId, tipo, descripcion);
 	}
 
-	public int getClave() {
-		return clave;
-	}
-
-	public void setClave(int clave) {
-		this.clave = clave;
-	}
 }

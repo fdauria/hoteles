@@ -27,7 +27,9 @@ import integracion.NuevoEstablecimientoResponse;
 import manager.ManagerRemote;
 import model.HabitacionDTO;
 import model.HotelDTO;
+import model.MedioDePagoDTO;
 import model.OfertaDTO;
+import model.ServicioDTO;
 
 @Stateless
 public class Controlador implements ControladorRemote {
@@ -282,5 +284,25 @@ public class Controlador implements ControladorRemote {
 	@Override
 	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion) {
 		return interfazRemota.agregarHabitacion(habitacion);
+	}
+	
+	@Override
+	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo){
+		return interfazRemota.obtenerServiciosPorTipo(tipo);
+	}
+
+	@Override
+	public List<MedioDePagoDTO> obtenerMediosDePago() {
+		return interfazRemota.obtenerMediosDePago();
+	}
+
+	@Override
+	public void cargarServicios() {
+		interfazRemota.cargarServicios();
+	}
+
+	@Override
+	public void cargarMediosDePago() {
+		interfazRemota.cargarMediosDePago();
 	}
 }

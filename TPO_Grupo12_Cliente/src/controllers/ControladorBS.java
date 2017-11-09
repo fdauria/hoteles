@@ -9,7 +9,9 @@ import javax.naming.NamingException;
 import controlador.ControladorRemote;
 import model.HabitacionDTO;
 import model.HotelDTO;
+import model.MedioDePagoDTO;
 import model.OfertaDTO;
+import model.ServicioDTO;
 
 public class ControladorBS implements ControladorRemote {
 
@@ -78,6 +80,26 @@ public class ControladorBS implements ControladorRemote {
 	@Override
 	public HabitacionDTO agregarHabitacion(HabitacionDTO habitacion) {
 		return controlador.agregarHabitacion(habitacion);
+	}
+
+	@Override
+	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo) {
+		return controlador.obtenerServiciosPorTipo(tipo);
+	}
+
+	@Override
+	public List<MedioDePagoDTO> obtenerMediosDePago() {
+		return controlador.obtenerMediosDePago();
+	}
+
+	@Override
+	public void cargarServicios() {
+		controlador.cargarServicios();
+	}
+
+	@Override
+	public void cargarMediosDePago() {
+		controlador.cargarMediosDePago();
 	}
 
 }

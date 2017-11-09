@@ -13,14 +13,14 @@ import controllers.ControladorBS;
 /**
  * Servlet implementation class Hoteles
  */
-@WebServlet("/Hoteles")
-public class Hoteles extends HttpServlet {
+@WebServlet("/Habitaciones")
+public class Habitaciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Hoteles() {
+	public Habitaciones() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -31,9 +31,9 @@ public class Hoteles extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("servicios", ControladorBS.getInstancia().obtenerServiciosPorTipo(1));
-		request.setAttribute("mediosDePago", ControladorBS.getInstancia().obtenerMediosDePago());
-		request.getRequestDispatcher("/hoteles.jsp").forward(request, response);
+		request.setAttribute("servicios", ControladorBS.getInstancia().obtenerServiciosPorTipo(2));
+		request.setAttribute("hoteles", ControladorBS.getInstancia().obtenerHoteles());
+		request.getRequestDispatcher("/habitaciones.jsp").forward(request, response);
 	}
 
 	/**

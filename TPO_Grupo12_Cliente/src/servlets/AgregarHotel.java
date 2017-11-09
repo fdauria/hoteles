@@ -1,6 +1,10 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import controllers.ControladorBS;
 import model.DireccionDTO;
@@ -27,6 +32,14 @@ public class AgregarHotel extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String nombre = request.getParameter("nombre");
 		String direccionNombre = request.getParameter("direccionNombre");
@@ -38,7 +51,7 @@ public class AgregarHotel extends HttpServlet {
 		if (serviciosArray != null) {
 			for (String item : serviciosArray) {
 				String keyValue[] = item.split(":");
-				servicioDTOList.add(new ServicioDTO(Integer.parseInt(keyValue[0]), keyValue[1]));
+				servicioDTOList.add(new ServicioDTO(Integer.parseInt(keyValue[0]), 1, keyValue[1]));
 			}
 		}
 
@@ -60,19 +73,26 @@ public class AgregarHotel extends HttpServlet {
 		hotelDTO.setMediosDePago(medioDePagoDTOList);
 
 		System.out.println(hotelDTO.toString());
-		ControladorBS.getInstancia().agregarHotel(hotelDTO);
+		HotelDTO nuevoHotelDTO = ControladorBS.getInstancia().agregarHotel(hotelDTO);
+
+		// if (request.getParameter("imagen") != null)
+		// agregarImagenHotel("imagen_" + nombre, request.getPart("file"));
 
 		this.getServletContext().getRequestDispatcher("/hoteles.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	private void agregarImagenHotel(String nombre, Part filePart) {
+		File uploads = new File("./uploads");
+		File file;
+		try {
+			file = File.createTempFile(nombre, ".jpg", uploads);
+			try (InputStream input = filePart.getInputStream()) {
+				Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
