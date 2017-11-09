@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -38,8 +39,10 @@ public class Hotel implements Serializable{
 	@JoinColumn(name = 	"direccionId")
 	private Direccion direccion;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name="Hotel_Servicio", joinColumns={@JoinColumn(name="hotelId")}, inverseJoinColumns={@JoinColumn(name="servicioId")})
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Hotel_Servicio", 
+	    joinColumns = {@JoinColumn(name = "hotelId")},
+	    inverseJoinColumns = {@JoinColumn(name = "servicioId")})
 	private List<Servicio> servicios  = new ArrayList<Servicio>();
 	
 	@OneToMany(mappedBy="hotel") 
@@ -47,8 +50,11 @@ public class Hotel implements Serializable{
 	
 	private String imagen;
 
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name="Hotel_MedioDePago", joinColumns={@JoinColumn(name="hotelId")}, inverseJoinColumns={@JoinColumn(name="medioDePagoId")})
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Hotel_MedioDePago", 
+	    joinColumns = {@JoinColumn(name = "hotelId")},
+	    inverseJoinColumns = {@JoinColumn(name = "medioDePagoId")})
 	private List<MedioDePago> mediosDePago  = new ArrayList<MedioDePago>();
 	
 	private int backofficeId;

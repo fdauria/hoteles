@@ -62,7 +62,24 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public HotelDTO agregarHotel(HotelDTO hotelDTO) {
-		return saveEntity(hotelFromDTO(hotelDTO)).toDTO();
+		Hotel hotel = saveEntity(hotelFromDTO(hotelDTO));
+		
+		
+		final List<Servicio> servicios = new ArrayList<>();
+		for(final ServicioDTO servicioDTO : hotelDTO.getServicios())
+			servicios.add(obtenerServicio(servicioDTO.getServicioId()));
+		
+		if(!servicios.isEmpty())
+			hotel.setServicios(servicios);
+		
+		final List<MedioDePago> medioDePagoList = new ArrayList<>();
+		for(final MedioDePagoDTO medioDePagoDTO : hotelDTO.getMediosDePago())
+			medioDePagoList.add(obtenerMedioDePago(medioDePagoDTO.getMedioDePagoId()));
+		
+		if(!medioDePagoList.isEmpty())
+			hotel.setMediosDePago(medioDePagoList);	
+		
+		return updateEntity(hotel).toDTO();
 	}
 	
 	public HotelDTO actualizarConIdBackoffice(HotelDTO hotelDTO){
@@ -109,9 +126,8 @@ public class Manager implements ManagerRemote {
 	
 	
 	
-	
 	public Hotel hotelFromDTO(HotelDTO hotelDTO){
-		final Hotel hotel = new Hotel();
+ 		final Hotel hotel = new Hotel();
 		hotel.setImagen(hotelDTO.getImagen());
 		hotel.setNombre(hotelDTO.getNombre());
 		
@@ -127,19 +143,7 @@ public class Manager implements ManagerRemote {
 			hotel.setDireccion(direccion);
 		}
 		
-		final List<Servicio> servicios = new ArrayList<>();
-		for(final ServicioDTO servicioDTO : hotelDTO.getServicios())
-			servicios.add(obtenerServicio(servicioDTO.getServicioId()));
 		
-		if(!servicios.isEmpty())
-			hotel.setServicios(servicios);
-		
-		final List<MedioDePago> medioDePagoList = new ArrayList<>();
-		for(final MedioDePagoDTO medioDePagoDTO : hotelDTO.getMediosDePago())
-			medioDePagoList.add(obtenerMedioDePago(medioDePagoDTO.getMedioDePagoId()));
-		
-		if(!medioDePagoList.isEmpty())
-			hotel.setMediosDePago(medioDePagoList);	
 		
 		hotel.setBackofficeId(hotelDTO.getBackofficeId());
 		
