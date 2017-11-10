@@ -10,7 +10,7 @@
 		<h1>Carga de hotel</h1>
 		
 		<div style="margin-top: 10px; padding-bottom: 40px;">
-			<form action="AgregarHotel" method="POST" class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
+			<form action="AgregarHotel" enctype="multipart/form-data" method="POST" class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
 				<div class="form-group">
 					<label for="nombre">Nombre</label>
 				    <input type="text" class="form-control" id="nombre" name="nombre">

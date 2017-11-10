@@ -1,6 +1,10 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controllers.ControladorBS;
+import model.HabitacionDTO;
+import model.HotelDTO;
+import model.OfertaDTO;
 
 @WebServlet("/AgregarOferta")
 public class AgregarOferta extends HttpServlet {
@@ -19,43 +26,45 @@ public class AgregarOferta extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	private Date getDate(String dateStr) {
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH).parse(dateStr);
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+
+		return date;
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		final int cupo = Integer.parseInt(request.getParameter("cupo"));
+		final float precio = Float.parseFloat(request.getParameter("precio"));
+		final Date fechaDesde = getDate(request.getParameter("fechaDesde"));
+		final Date fechaHasta = getDate(request.getParameter("fechaHasta"));
+		final String politicaDeCancelacion = request.getParameter("politicaDeCancelacion");
 
-		/*
-		 * String nombre = request.getParameter("nombre"); String
-		 * direccionNombre = request.getParameter("direccionNombre"); String
-		 * direccionLatitude = request.getParameter("direccionLatitude"); String
-		 * direccionLongitud = request.getParameter("direccionLongitud");
-		 * 
-		 * List<ServicioDTO> servicioDTOList = new ArrayList<>(); String[]
-		 * serviciosArray = request.getParameterValues("servicios"); if
-		 * (serviciosArray != null) { for (String item : serviciosArray) {
-		 * String keyValue[] = item.split(":"); servicioDTOList.add(new
-		 * ServicioDTO(Integer.parseInt(keyValue[0]), keyValue[1])); } }
-		 * 
-		 * List<MedioDePagoDTO> medioDePagoDTOList = new ArrayList<>(); String[]
-		 * medioDePagoList = request.getParameterValues("mediosDePago"); if
-		 * (medioDePagoList != null) { for (String item : medioDePagoList) {
-		 * String keyValue[] = item.split(":"); medioDePagoDTOList.add(new
-		 * MedioDePagoDTO(Integer.parseInt(keyValue[0]), keyValue[1])); } }
-		 * 
-		 * final DireccionDTO direccionDTO = new DireccionDTO(direccionNombre,
-		 * direccionLatitude, direccionLongitud);
-		 * 
-		 * final HotelDTO hotelDTO = new HotelDTO(); hotelDTO.setNombre(nombre);
-		 * hotelDTO.setDireccion(direccionDTO);
-		 * hotelDTO.setServicios(servicioDTOList);
-		 * hotelDTO.setMediosDePago(medioDePagoDTOList);
-		 * 
-		 * System.out.println(hotelDTO.toString());
-		 * HotelControladorBS.getInstancia().crearHotel(hotelDTO);
-		 */
+		final HotelDTO hotelDTO = ControladorBS.getInstancia()
+				.obtenerHotel(Integer.parseInt(request.getParameter("hotel")));
+		final HabitacionDTO habitacionDTO = ControladorBS.getInstancia()
+				.obtenerHabitacion(Integer.parseInt(request.getParameter("habitacion")));
+
+		OfertaDTO ofertaDTO = new OfertaDTO();
+		ofertaDTO.setCupo(cupo);
+		ofertaDTO.setFechaDesde(fechaDesde);
+		ofertaDTO.setFechaHasta(fechaHasta);
+		ofertaDTO.setPoliticaCancelacion(politicaDeCancelacion);
+		ofertaDTO.setPrecio(precio);
+		ofertaDTO.setHotel(hotelDTO);
+		ofertaDTO.setHabitacion(habitacionDTO);
+
+		ControladorBS.getInstancia().agregarOferta(ofertaDTO);
 
 		request.setAttribute("hoteles", ControladorBS.getInstancia().obtenerHoteles());
 		request.setAttribute("habitaciones", ControladorBS.getInstancia().obtenerHabitaciones());
 
-		this.getServletContext().getRequestDispatcher("./ofertas.jsp").forward(request, response);
+		request.getRequestDispatcher("/ofertas.jsp").forward(request, response);
 	}
 
 	/**

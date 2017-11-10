@@ -11,7 +11,7 @@ public class OfertaDTO  implements Serializable{
 	private int ofertaId;
 	private Date fechaDesde;
 	private Date fechaHasta;
-	private float price;
+	private float precio;
 	private HabitacionDTO habitacion;
 	private String politicaCancelacion;
 	private HotelDTO hotel;
@@ -21,13 +21,13 @@ public class OfertaDTO  implements Serializable{
 
 	}
 
-	public OfertaDTO(int ofertaId, Date fechaDesde, Date fechaHasta, float price, HabitacionDTO habitacion,
+	public OfertaDTO(int ofertaId, Date fechaDesde, Date fechaHasta, float precio, HabitacionDTO habitacion,
 			String politicaCancelacion, HotelDTO hotelDTO, int cupo) {
 		super();
 		this.ofertaId = ofertaId;
 		this.fechaDesde = fechaDesde;
 		this.fechaHasta = fechaHasta;
-		this.price = price;
+		this.precio = precio;
 		this.habitacion = habitacion;
 		this.politicaCancelacion = politicaCancelacion;
 		this.setHotel(hotelDTO);
@@ -70,12 +70,12 @@ public class OfertaDTO  implements Serializable{
 		this.fechaHasta = fechaHasta;
 	}
 
-	public float getPrice() {
-		return price;
+	public float getPrecio() {
+		return precio;
 	}
 
-	public void setPrice(float price) {
-		this.price = price;
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 
 	public HabitacionDTO getHabitacion() {

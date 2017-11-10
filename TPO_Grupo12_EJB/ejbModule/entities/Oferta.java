@@ -22,7 +22,7 @@ public class Oferta implements Serializable{
 	private int ofertaId;
 	private Date fechaDesde;
 	private Date fechaHasta;
-	private float price;
+	private float precio = 0;
 	
 	@ManyToOne
 	@JoinColumn(name="hotelId")
@@ -40,13 +40,13 @@ public class Oferta implements Serializable{
 
 	}
 
-	public Oferta(int ofertaId, Date fechaDesde, Date fechaHasta, float price, Hotel hotel, Habitacion habitacion,
+	public Oferta(int ofertaId, Date fechaDesde, Date fechaHasta, float precio, Hotel hotel, Habitacion habitacion,
 			String politicaCancelacion, int cupo) {
 		super();
 		this.ofertaId = ofertaId;
 		this.fechaDesde = fechaDesde;
 		this.fechaHasta = fechaHasta;
-		this.price = price;
+		this.precio = precio;
 		this.hotel=hotel;
 		this.habitacion = habitacion;
 		this.politicaCancelacion = politicaCancelacion;
@@ -89,12 +89,12 @@ public class Oferta implements Serializable{
 		this.fechaHasta = fechaHasta;
 	}
 
-	public float getPrice() {
-		return price;
+	public float getPrecio() {
+		return precio;
 	}
 
-	public void setPrice(float price) {
-		this.price = price;
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 
 	public Habitacion getHabitacion() {
@@ -114,7 +114,7 @@ public class Oferta implements Serializable{
 	}
 	
 	public OfertaDTO toDTO(){
-		return new OfertaDTO(ofertaId, fechaDesde, fechaHasta, price, habitacion.toDTO(), politicaCancelacion,hotel.toDTO(), cupo);
+		return new OfertaDTO(ofertaId, fechaDesde, fechaHasta, precio, habitacion.toDTO(), politicaCancelacion,hotel.toDTO(), cupo);
 	}
 
 	public Hotel getHotel() {
@@ -124,4 +124,6 @@ public class Oferta implements Serializable{
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
+	
+	
 }

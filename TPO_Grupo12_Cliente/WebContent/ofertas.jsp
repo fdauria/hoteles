@@ -8,12 +8,13 @@
 		
 		<h1>Carga de oferta</h1>
 		
-		<div style="margin-top: 10px; padding-bottom: 40px;"">
+		<div style="margin-top: 10px; padding-bottom: 40px;">
 			<form action="AgregarOferta" method="POST" class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
 				
 				<div class="form-group">
 				    <label for="hotel">Hotel</label>
 				    <select id="hotel" class="form-control" data-style="btn-primary" name="hotel">
+	    				<option value="-1"></option>
 					    <c:forEach items="${hoteles}" var="hotel">
 	    					<option value="${hotel.hotelId}">${hotel.nombre}</option>
 						</c:forEach>
@@ -40,8 +41,14 @@
 				
 				<div class="form-group">
 					<label for="precio">Precio</label>
-				    <input type="precio" class="form-control" id="precio" name="precio">
+				    <input type="text" class="form-control" id="precio" name="precio">
 				    <small id="precioHelp" class="form-text text-muted">Ingrese el precio de la oferta</small>
+				</div>
+
+				<div class="form-group">
+					<label for="cupo">Cupo</label>
+				    <input type="text" class="form-control" id="cupo" name="cupo">
+				    <small id="cupoHelp" class="form-text text-muted">Ingrese el cupo</small>
 				</div>
 				
 				<div class="form-group">
@@ -83,7 +90,7 @@
 	                $.ajax({
 	                    type: "POST",
 	                    url: "ObtenerHabitacionesPorHotel",
-	                    data: {hotel: $('#hotel').attr("selectedIndex") },
+	                    data: {hotel: $("#hotel").val() },
 	                    success: function(data){
 	                    	$('#habitacion').html(data)
 	                    }

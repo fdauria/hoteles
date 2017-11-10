@@ -18,7 +18,7 @@ import model.HabitacionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
 import model.OfertaDTO;
-import model.ServicioDTO;
+import model.ServicioDTO;import sun.util.BuddhistCalendar;
 
 @Stateless
 public class Manager implements ManagerRemote {
@@ -81,6 +81,15 @@ public class Manager implements ManagerRemote {
 		
 		return updateEntity(hotel).toDTO();
 	}
+
+	@Override
+	public OfertaDTO agregarOferta(OfertaDTO ofertaDTO) {
+		Oferta oferta = saveEntity(ofertaFromDTO(ofertaDTO));
+
+		oferta.setHotel(obtenerHotelEntity(ofertaDTO.getHotel().getHotelId()));
+		oferta.setHabitacion(obtenerHabitacionEntity(ofertaDTO.getHabitacion().getHabitacionId()));
+		return updateEntity(oferta).toDTO();
+	}
 	
 	public HotelDTO actualizarConIdBackoffice(HotelDTO hotelDTO){
 		return updateEntity(hotelFromDTO(hotelDTO)).toDTO();
@@ -94,11 +103,6 @@ public class Manager implements ManagerRemote {
 	@Override
 	public List<OfertaDTO> obtenerOfertas() {
 		return getAll(Oferta.class, "Oferta").stream().map(x -> x.toDTO()).collect(Collectors.toList());
-	}
-
-	@Override
-	public OfertaDTO agregarOferta(OfertaDTO oferta) {
-		return saveEntity(oferta);
 	}
 
 	@Override
@@ -118,8 +122,8 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public HabitacionDTO agregarHabitacion(HotelDTO hotelDTO, HabitacionDTO habitacionDTO) {
-		Hotel hotel = hotelFromDTO(hotelDTO);
-		Habitacion habitacion = habitacionFromDTO(habitacionDTO);
+		final Hotel hotel = obtenerHotelEntity(hotelDTO.getHotelId());
+		final Habitacion habitacion = habitacionFromDTO(habitacionDTO);
 		hotel.getHabitaciones().add(habitacion);
 		updateEntity(hotel);
 		
@@ -127,9 +131,13 @@ public class Manager implements ManagerRemote {
 	}
 	
 	
+	private Hotel obtenerHotelEntity(int id){
+		return (Hotel) getEntityManager().createQuery("from Hotel where hotelId=" + id).getSingleResult();
+	}
 	
-	
-	
+	private Habitacion obtenerHabitacionEntity(int id){
+		return (Habitacion) getEntityManager().createQuery("from Habitacion where habitacionId=" + id).getSingleResult();
+	}
 	
 	public Hotel hotelFromDTO(HotelDTO hotelDTO){
  		final Hotel hotel = new Hotel();
@@ -148,8 +156,6 @@ public class Manager implements ManagerRemote {
 			hotel.setDireccion(direccion);
 		}
 		
-		
-		
 		hotel.setBackofficeId(hotelDTO.getBackofficeId());
 		
 		return hotel;
@@ -160,10 +166,8 @@ public class Manager implements ManagerRemote {
 		oferta.setFechaDesde(ofertaDTO.getFechadDesde());
 		oferta.setFechaHasta(ofertaDTO.getFechaHasta());
 		oferta.setCupo(ofertaDTO.getCupo());
-		oferta.setPrice(ofertaDTO.getPrice());
+		oferta.setPrecio(ofertaDTO.getPrecio());
 		oferta.setPoliticaCancelacion(ofertaDTO.getPoliticaCancelacion());
-		oferta.setHotel(hotelFromDTO(ofertaDTO.getHotel()));
-		oferta.setHabitacion(habitacionFromDTO(ofertaDTO.getHabitacion()));
 		
 		return oferta;
 	}
@@ -173,6 +177,7 @@ public class Manager implements ManagerRemote {
 		habitacion.setCapacidad(habitacionDTO.getCapacidad());
 		habitacion.setDescripcion(habitacionDTO.getDescripcion());
 		habitacion.setTipo(habitacionDTO.getTipo());
+		habitacion.setNombre(habitacionDTO.getNombre());
 		habitacion.setImagen(habitacionDTO.getImagen());
 		
 		final List<Servicio> servicios = new ArrayList<>();
