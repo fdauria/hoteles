@@ -50,7 +50,7 @@ public class Controlador implements ControladorRemote {
 	@Override
 	public HotelDTO agregarHotel(HotelDTO hotel) {
 		final HotelDTO hotelDTO = interfazRemota.agregarHotel(hotel);
-		//sendHotelToBackOffice(hotelDTO);
+		sendHotelToBackOffice(hotelDTO);
 		return hotelDTO;
 	}
 	
@@ -81,17 +81,18 @@ public class Controlador implements ControladorRemote {
 	}
 	
 	public void toLog(LogBackOffice log) throws IOException{
-		URL url;
-		url = new URL(Props.URL_TO_LOG);
-		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-		urlConnection.setDoOutput(true);
-		urlConnection.setRequestMethod("POST");
-		urlConnection.setRequestProperty("Content-Type", "application/json");
+		URL url2;
+		url2 = new URL(Props.URL_TO_LOG);
+		HttpURLConnection urlConnection2 = (HttpURLConnection) url2.openConnection();
+		urlConnection2.setDoOutput(true);
+		urlConnection2.setRequestMethod("POST");
+		urlConnection2.setRequestProperty("Content-Type", "application/json");
 
-		IOUtils.write(new Gson().toJson(log), urlConnection.getOutputStream());
+		IOUtils.write(new Gson().toJson(log), urlConnection2.getOutputStream());
+		String response = IOUtils.toString(urlConnection2.getInputStream());
 	}
 	
-	public void ofertaToJMS() throws Exception{
+	public void ofertaToJMS(){
 		Context context;
 		try 
 		{
@@ -109,23 +110,20 @@ public class Controlador implements ControladorRemote {
             String destinationString = Props.destinationOfertaToJMS;
             Destination destination = (Destination) context.lookup(destinationString);
  
-            // Create the JMS connection, session, producer, and consumer
-            Connection connection = connectionFactory.createConnection(System.getProperty("usernameConnOferta", "hotelera"), System.getProperty("passwordConnOferta", "hotelera"));
+            Connection connection = connectionFactory.createConnection(Props.usernameConnOferta, Props.passwordConnOferta);
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-           // consumer = session.createConsumer(destination);
             connection.start();
-			// crear un producer para enviar mensajes usando la session
 			MessageProducer producer = session.createProducer(destination);
-			// crear un mensaje de tipo text y setearle el contenido
 			TextMessage message = session.createTextMessage();
 			message.setText("hola");
-			// enviar el mensaje
 			producer.send(message);
-			// TODO: recordar cerrar la session y la connection en un bloque â€œfinallyâ€�
 			connection.close();
-			} catch (Exception e) {
+			
+			
+			
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		/*Context namingContext = null;
@@ -265,7 +263,9 @@ public class Controlador implements ControladorRemote {
 
 	@Override
 	public OfertaDTO agregarOferta(OfertaDTO oferta) {
-		return interfazRemota.agregarOferta(oferta);
+		OfertaDTO ofertaDTO =  interfazRemota.agregarOferta(oferta);
+		ofertaToJMS();
+		return ofertaDTO;
 	}
 
 	@Override
