@@ -58,7 +58,7 @@ public class Controlador implements ControladorRemote {
 		try {
 			toLog(new LogBackOffice("OH", "BO", "Crear establecimiento", "INFO"));
 			
-			url = new URL("http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/EnviarSolicitud");
+			url = new URL( System.getProperty("URL_SEND_HOTEL_BACKOFFICE","http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/EnviarSolicitud"));
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
 			urlConnection.setRequestMethod("POST");
@@ -81,7 +81,7 @@ public class Controlador implements ControladorRemote {
 	
 	public void toLog(LogBackOffice log) throws IOException{
 		URL url;
-		url = new URL("http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/RegistrarLog");
+		url = new URL(System.getProperty("URL_TO_LOG","http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/RegistrarLog"));
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("POST");
@@ -96,20 +96,20 @@ public class Controlador implements ControladorRemote {
 		{
 		    final Properties env = new Properties();
             env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-            env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "http-remoting://192.168.0.101:8080"));
-            env.put(Context.SECURITY_PRINCIPAL, System.getProperty("username", "paquete"));
-            env.put(Context.SECURITY_CREDENTIALS, System.getProperty("password", "paquete"));
+            env.put(Context.PROVIDER_URL, System.getProperty("ofertaToJMS_PROVIDER_URL", "http-remoting://192.168.0.101:8080"));
+            env.put(Context.SECURITY_PRINCIPAL, System.getProperty("usernameOferta", "hotelera"));
+            env.put(Context.SECURITY_CREDENTIALS, System.getProperty("passwordOferta", "hotelera"));
             context = new InitialContext(env);
  
             // Perform the JNDI lookups
             String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");
             ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
  
-            String destinationString = System.getProperty("destination", "jms/queue/ofertapaquete");
+            String destinationString = System.getProperty("destinationOfertaToJMS", "jms/queue/ofertahotelera");
             Destination destination = (Destination) context.lookup(destinationString);
  
             // Create the JMS connection, session, producer, and consumer
-            Connection connection = connectionFactory.createConnection(System.getProperty("username", "paquete"), System.getProperty("password", "paquete"));
+            Connection connection = connectionFactory.createConnection(System.getProperty("usernameConnOferta", "hotelera"), System.getProperty("passwordConnOferta", "hotelera"));
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
            // consumer = session.createConsumer(destination);
             connection.start();
@@ -120,7 +120,7 @@ public class Controlador implements ControladorRemote {
 			message.setText("hola");
 			// enviar el mensaje
 			producer.send(message);
-			// TODO: recordar cerrar la session y la connection en un bloque “finally”
+			// TODO: recordar cerrar la session y la connection en un bloque â€œfinallyâ€�
 			connection.close();
 			} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -166,7 +166,7 @@ public class Controlador implements ControladorRemote {
             message.setText("hola");
             // enviar el mensaje
             producer.send(message);
-            // TODO: recordar cerrar la session y la connection en un bloque “finally”
+            // TODO: recordar cerrar la session y la connection en un bloque â€œfinallyâ€�
             connection.close();
             } catch (Exception e) {
             // TODO Auto-generated catch block
