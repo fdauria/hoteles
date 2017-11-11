@@ -18,6 +18,7 @@ public class Direccion implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int direccionId;
 	private String direccion;
+	private String destino;
 	private String latitud;
 	private String longitud;
 
@@ -25,9 +26,10 @@ public class Direccion implements Serializable{
 		
 	}
 	
-	public Direccion(int direccionId, String direccion, String latitud, String longitud) {
+	public Direccion(int direccionId, String destino, String direccion, String latitud, String longitud) {
 		super();
 		this.direccionId = direccionId;
+		this.destino = destino;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
@@ -62,8 +64,21 @@ public class Direccion implements Serializable{
 	}
 	
 	public DireccionDTO toDTO(){
-		return new DireccionDTO(direccionId, direccion, latitud, longitud);
+		return new DireccionDTO(direccionId, destino, direccion, latitud, longitud);
 	}
+
+	public String getDestino() {
+		return destino;
+	}
+
+	public void setDestino(String destino) {
+		this.destino = destino;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+	
 
 
 }

@@ -12,9 +12,9 @@
 		
 			<nav class="navbar navbar-light bg-faded" style="text-align: center">
 				<form class="form-inline">
-					<a class="col-md-4 col-xs-4 col-sm-4" href="./Hoteles">Establecimientos</a> 
-					<a class="col-md-4 col-xs-4 col-sm-4" href="./Habitaciones">Habitaciones</a> 
-					<a class="col-md-4 col-xs-4 col-sm-4" href="./Ofertas">Ofertas</a>
+				<a class="col-md-4 col-xs-4 col-sm-4" href="./ListarHoteles">Establecimientos</a> 
+					<a class="col-md-4 col-xs-4 col-sm-4" href="./ListarHabitaciones">Habitaciones</a> 
+					<a class="col-md-4 col-xs-4 col-sm-4" href="./ListarOfertas">Ofertas</a>
 				</form>
 			</nav>
 		</div>

@@ -17,6 +17,13 @@
 				    <small id="nombrehelp" class="form-text text-muted">Ingrese el nombre del establecimiento</small>
 				</div>
 				
+				
+				<div class="form-group">
+					<label for="destino">Destino</label>
+				    <input type="text" class="form-control" id="destino" name="destino">
+				    <small id="destino" class="form-text text-muted">Ingrese el destino</small>
+				</div>
+				
 				<div class="form-group">
 					<label for="direccion">Direccion</label>
 				    <input type="text" class="form-control" id="direccionNombre" name="direccionNombre">
@@ -50,7 +57,7 @@
 				</div>
 				
 				<button type="submit" class="btn btn-primary">Agregar hotel</button>
-				<a href="./index.jsp" class="">Volver</button>
+				<a href="./ListarHoteles" class="">Volver</button>
 
 			</form>
 		</div>

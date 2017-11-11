@@ -25,6 +25,7 @@ import entities.Habitacion;
 import integracion.LogBackOffice;
 import integracion.NuevoEstablecimientoJSON;
 import integracion.NuevoEstablecimientoResponse;
+import integracion.Props;
 import manager.ManagerRemote;
 import model.HabitacionDTO;
 import model.HotelDTO;
@@ -58,7 +59,7 @@ public class Controlador implements ControladorRemote {
 		try {
 			toLog(new LogBackOffice("OH", "BO", "Crear establecimiento", "INFO"));
 			
-			url = new URL( System.getProperty("URL_SEND_HOTEL_BACKOFFICE","http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/EnviarSolicitud"));
+			url = new URL(Props.URL_SEND_HOTEL_BACKOFFICE);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
 			urlConnection.setRequestMethod("POST");
@@ -81,7 +82,7 @@ public class Controlador implements ControladorRemote {
 	
 	public void toLog(LogBackOffice log) throws IOException{
 		URL url;
-		url = new URL(System.getProperty("URL_TO_LOG","http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/RegistrarLog"));
+		url = new URL(Props.URL_TO_LOG);
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("POST");
@@ -96,16 +97,16 @@ public class Controlador implements ControladorRemote {
 		{
 		    final Properties env = new Properties();
             env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-            env.put(Context.PROVIDER_URL, System.getProperty("ofertaToJMS_PROVIDER_URL", "http-remoting://192.168.0.101:8080"));
-            env.put(Context.SECURITY_PRINCIPAL, System.getProperty("usernameOferta", "hotelera"));
-            env.put(Context.SECURITY_CREDENTIALS, System.getProperty("passwordOferta", "hotelera"));
+            env.put(Context.PROVIDER_URL, Props.ofertaToJMS_PROVIDER_URL_value);
+            env.put(Context.SECURITY_PRINCIPAL, Props.usernameConnOferta);
+            env.put(Context.SECURITY_CREDENTIALS, Props.passwordConnOferta);
             context = new InitialContext(env);
  
             // Perform the JNDI lookups
-            String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");
+            String connectionFactoryString = Props.connection_factory_value;
             ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
  
-            String destinationString = System.getProperty("destinationOfertaToJMS", "jms/queue/ofertahotelera");
+            String destinationString = Props.destinationOfertaToJMS;
             Destination destination = (Destination) context.lookup(destinationString);
  
             // Create the JMS connection, session, producer, and consumer

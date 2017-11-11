@@ -114,7 +114,10 @@ public class Habitacion implements Serializable{
 	}
 
 	public HabitacionDTO toDTO(){
-		List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
+		final List<ServicioDTO> servicioDTOList = new ArrayList<ServicioDTO>();
+		for(final Servicio servicio : servicios)
+			servicioDTOList.add(servicio.toDTO());
+		
 		return new HabitacionDTO(habitacionId, nombre, descripcion, capacidad, tipo, servicioDTOList, imagen);
 	}
 }

@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import controllers.ControladorBS;
+import integracion.Props;
 import model.DireccionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
@@ -46,6 +47,7 @@ public class AgregarHotel extends HttpServlet {
 		List<String> serviciosList = new ArrayList<String>();
 		List<String> medioDePagoList = new ArrayList<String>();
 		String nombre = "";
+		String destino = "";
 		String direccionNombre = "";
 		String direccionLatitude = "";
 		String direccionLongitud = "";
@@ -70,6 +72,9 @@ public class AgregarHotel extends HttpServlet {
 					case "nombre":
 						nombre = item.getString();
 						break;
+					case "destino":
+						destino = item.getString();
+						break;
 					case "direccionNombre":
 						direccionNombre = item.getString();
 						break;
@@ -93,7 +98,7 @@ public class AgregarHotel extends HttpServlet {
 					Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 					fileName = "hotel" + timestamp.getTime();
 					String filePath = uploadPath + File.separator + fileName + ".jpg";
-					String fileContextPath = uploadContextPath + File.separator + fileName + ".jpg";
+					String fileContextPath = Props.IP_LOCAL + uploadContextPath + File.separator + fileName + ".jpg";
 
 					File storeFile = new File(filePath);
 					// saves the file on disk
@@ -120,7 +125,8 @@ public class AgregarHotel extends HttpServlet {
 			medioDePagoDTOList.add(new MedioDePagoDTO(Integer.parseInt(keyValue[0]), keyValue[1]));
 		}
 
-		final DireccionDTO direccionDTO = new DireccionDTO(direccionNombre, direccionLatitude, direccionLongitud);
+		final DireccionDTO direccionDTO = new DireccionDTO(destino, direccionNombre, direccionLatitude,
+				direccionLongitud);
 
 		final HotelDTO hotelDTO = new HotelDTO();
 		hotelDTO.setNombre(nombre);

@@ -1,5 +1,7 @@
 package manager;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,12 +10,18 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.commons.io.IOUtils;
+
+import com.google.gson.Gson;
+
 import entities.Direccion;
 import entities.Habitacion;
 import entities.Hotel;
 import entities.MedioDePago;
 import entities.Oferta;
 import entities.Servicio;
+import integracion.NuevoEstablecimientoJSON;
+import integracion.NuevoEstablecimientoResponse;
 import model.HabitacionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
@@ -150,6 +158,7 @@ public class Manager implements ManagerRemote {
 		
 		if(hotelDTO.getDireccion() != null){
 			Direccion direccion = new Direccion();
+			direccion.setDestino(hotelDTO.getDireccion().getDestino());
 			direccion.setDireccion(hotelDTO.getDireccion().getDireccion());
 			direccion.setLatitud(hotelDTO.getDireccion().getLatitud());
 			direccion.setLongitud(hotelDTO.getDireccion().getLongitud());
@@ -203,11 +212,13 @@ public class Manager implements ManagerRemote {
 	}
 	
 	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo){
+		cargarServicios();
 		return getAll(Servicio.class, "Servicio").stream().filter(servicio -> servicio.getTipo() == tipo).map(x -> x.toDTO()).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<MedioDePagoDTO> obtenerMediosDePago() {
+		cargarMediosDePago();
 		return getAll(MedioDePago.class, "MedioDePago").stream().map(x -> x.toDTO()).collect(Collectors.toList());
 	}
 
@@ -230,10 +241,10 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public void cargarMediosDePago() {
-		saveEntity(new MedioDePago(1, "VISA"));
-		saveEntity(new MedioDePago(1, "AMEX"));
-		saveEntity(new MedioDePago(1, "MASTER"));
-		saveEntity(new MedioDePago(1, "Mercado Pago"));
-		saveEntity(new MedioDePago(1, "Efectivo"));
+		saveEntity(new MedioDePago(1, "Tarjeta de credito"));
+		saveEntity(new MedioDePago(2, "Cheque"));
+		saveEntity(new MedioDePago(3, "Pago en destino"));
+		saveEntity(new MedioDePago(4, "Mercado Pago"));
+		saveEntity(new MedioDePago(5, "Paypal"));
 	}
 }

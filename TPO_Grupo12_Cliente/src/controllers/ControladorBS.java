@@ -27,7 +27,6 @@ public class ControladorBS implements ControladorRemote {
 	}
 
 	public ControladorBS() {
-
 		try {
 			InitialContext initialContext = new InitialContext();
 			controlador = (ControladorRemote) initialContext.lookup(
@@ -35,7 +34,6 @@ public class ControladorBS implements ControladorRemote {
 		} catch (NamingException ex) {
 			ex.printStackTrace();
 		}
-
 	}
 
 	public List<HotelDTO> obtenerHoteles() {

@@ -56,7 +56,7 @@
 				</div>
 				
 				<button type="submit" class="btn btn-primary">Agregar habitacion</button>
-				<a href="./index.jsp" class="">Volver</button>
+				<a href="./ListarHabitaciones" class="">Volver</button>
 
 			</form>
 		</div>
