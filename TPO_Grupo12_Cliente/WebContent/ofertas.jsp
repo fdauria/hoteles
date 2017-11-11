@@ -41,13 +41,13 @@
 				
 				<div class="form-group">
 					<label for="precio">Precio</label>
-				    <input type="text" class="form-control" id="precio" name="precio">
+				    <input type="text" class="form-control" id="precio" name="precio" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
 				    <small id="precioHelp" class="form-text text-muted">Ingrese el precio de la oferta</small>
 				</div>
 
 				<div class="form-group">
 					<label for="cupo">Cupo</label>
-				    <input type="text" class="form-control" id="cupo" name="cupo">
+				    <input type="text" class="form-control" id="cupo" name="cupo" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
 				    <small id="cupoHelp" class="form-text text-muted">Ingrese el cupo</small>
 				</div>
 				

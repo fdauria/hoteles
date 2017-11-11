@@ -33,7 +33,7 @@
 
 				<div class="form-group">
 					<label for="capacidad">Capacidad</label>
-				    <input type="text" class="form-control" id="capacidad" name="capacidad">
+				    <input type="text" class="form-control" id="capacidad" name="capacidad" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
 				</div>
 				
 				<div class="form-group">
