@@ -39,7 +39,9 @@ public interface ManagerRemote {
 
 	public void cargarServicios();
 	
+	public void cargarServiciosPorTipo(List<ServicioDTO> servicioDTOs);
+	
 	public void cargarMediosDePago();
-
+	
 
 }

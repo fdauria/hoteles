@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -7,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import controlador.ControladorRemote;
+import integracion.ServiciosJSON;
 import model.HabitacionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
@@ -98,6 +100,11 @@ public class ControladorBS implements ControladorRemote {
 	@Override
 	public void cargarMediosDePago() {
 		controlador.cargarMediosDePago();
+	}
+
+	@Override
+	public List<ServiciosJSON> obtenerServicios() throws IOException {
+		return controlador.obtenerServicios();
 	}
 
 }

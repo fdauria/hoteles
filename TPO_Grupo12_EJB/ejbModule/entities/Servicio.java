@@ -3,8 +3,6 @@ package entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import model.ServicioDTO;
@@ -15,7 +13,6 @@ public class Servicio implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int servicioId;
 	private int tipo;
 	private String descripcion;
@@ -24,8 +21,9 @@ public class Servicio implements Serializable{
 
 	}
 
-	public Servicio(int tipo, String descripcion) {
+	public Servicio(int servicioId,int tipo, String descripcion) {
 		super();
+		this.servicioId=servicioId;
 		this.descripcion = descripcion;
 		this.tipo = tipo;
 	}

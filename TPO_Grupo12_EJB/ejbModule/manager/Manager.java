@@ -224,19 +224,19 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public void cargarServicios() {
-		saveEntity(new Servicio(1, "Estacionamiento"));
-		saveEntity(new Servicio(1, "Wifi"));
-		saveEntity(new Servicio(1, "Desayuno"));
-		saveEntity(new Servicio(1, "Media pension"));
-		saveEntity(new Servicio(1, "Picina"));
-		saveEntity(new Servicio(1, "Cancha de golf"));
+		updateEntity(new Servicio(1,1, "Estacionamiento"));
+		updateEntity(new Servicio(2,1, "Wifi"));
+		updateEntity(new Servicio(3,1, "Desayuno"));
+		updateEntity(new Servicio(4,1, "Media pension"));
+		updateEntity(new Servicio(5,1, "Picina"));
+		updateEntity(new Servicio(6,1, "Cancha de golf"));
 
-		saveEntity(new Servicio(2, "Televisor"));
-		saveEntity(new Servicio(2, "Jacuzi"));
-		saveEntity(new Servicio(2, "Aire acondicionado"));
-		saveEntity(new Servicio(2, "Parrilla"));
-		saveEntity(new Servicio(2, "Lavarropas"));
-		saveEntity(new Servicio(2, "Microondas"));	
+		updateEntity(new Servicio(7,2, "Televisor"));
+		updateEntity(new Servicio(8,2, "Jacuzi"));
+		updateEntity(new Servicio(9,2, "Aire acondicionado"));
+		updateEntity(new Servicio(10,2, "Parrilla"));
+		updateEntity(new Servicio(11,2, "Lavarropas"));
+		updateEntity(new Servicio(12,2, "Microondas"));	
 	}
 
 	@Override
@@ -247,4 +247,13 @@ public class Manager implements ManagerRemote {
 		saveEntity(new MedioDePago(4, "Mercado Pago"));
 		saveEntity(new MedioDePago(5, "Paypal"));
 	}
+
+	@Override
+	public void cargarServiciosPorTipo(List<ServicioDTO> servicioDTOs) {
+		for (ServicioDTO servicioDTO : servicioDTOs) {
+			saveEntity(new Servicio(servicioDTO.getServicioId(),servicioDTO.getTipo(), servicioDTO.getDescripcion()));
+		}
+		
+	}
+
 }

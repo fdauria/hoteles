@@ -1,10 +1,11 @@
 package controlador;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.ejb.Remote;
 
-import entities.Habitacion;
+import integracion.ServiciosJSON;
 import model.HabitacionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
@@ -38,5 +39,7 @@ public interface ControladorRemote {
 	public void cargarServicios();
 	
 	public void cargarMediosDePago();
+	
+	public List<ServiciosJSON>  obtenerServicios() throws IOException;
 	
 }

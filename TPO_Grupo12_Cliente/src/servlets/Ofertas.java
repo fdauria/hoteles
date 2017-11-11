@@ -31,7 +31,9 @@ public class Ofertas extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		ControladorBS.getInstancia().obtenerServiciosPorTipo(1);
 		request.setAttribute("hoteles", ControladorBS.getInstancia().obtenerHoteles());
+		// ControladorBS.getInstancia().obtenerServiciosPorTipo(0);
 		request.getRequestDispatcher("/ofertas.jsp").forward(request, response);
 
 	}

@@ -1,8 +1,11 @@
 package controlador;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -21,11 +24,13 @@ import org.apache.commons.io.IOUtils;
 
 import com.google.gson.Gson;
 
-import entities.Habitacion;
 import integracion.LogBackOffice;
 import integracion.NuevoEstablecimientoJSON;
 import integracion.NuevoEstablecimientoResponse;
 import integracion.Props;
+import integracion.RequestServiciosTipo;
+import integracion.ServiciosJSON;
+import integracion.ServiciosPorTipoResponseJSON;
 import manager.ManagerRemote;
 import model.HabitacionDTO;
 import model.HotelDTO;
@@ -78,6 +83,49 @@ public class Controlador implements ControladorRemote {
 				System.out.println("Fallo al enviar el establecimiento --> Error de conexion");
 			}
 		}
+	}
+	
+	public List<ServiciosJSON> obtenerServicios() throws IOException{
+		URL url;
+		url = new URL(System.getProperty("URL_OBTENER_SERVICIOS","http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/GetServicios"));
+		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+		urlConnection.setDoInput(true);
+		urlConnection.setRequestMethod("GET");
+		ServiciosJSON[] listServHabitacion = new Gson().fromJson((Reader)new InputStreamReader(urlConnection.getInputStream()), ServiciosJSON[].class);
+
+		List<ServiciosJSON> seree = new ArrayList<ServiciosJSON>();
+		return seree;
+	}
+	
+	
+	public List<ServicioDTO> obtenerServiciosPorTipoRest(String tipo) throws IOException{
+		
+		//DESDE ACA NO TOCAR (ES LO DE AGUS FUNCIONANDO)
+		URL url;
+		url = new URL(System.getProperty("URL_OBTENER_SERVICIOS_POR_TIPO","http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/GetServiciosPorTipo"));
+		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+		urlConnection.setDoOutput(true);
+		urlConnection.setRequestMethod("POST");
+		urlConnection.setRequestProperty("Content-Type", "application/json");
+		
+		RequestServiciosTipo req =  new RequestServiciosTipo();
+		req.setNombre(tipo);
+		
+		IOUtils.write(new Gson().toJson(req), urlConnection.getOutputStream());
+		ServiciosPorTipoResponseJSON[] response = new Gson().fromJson(IOUtils.toString(urlConnection.getInputStream()), ServiciosPorTipoResponseJSON[].class);
+		//HASTA ACA  NO TOCAR (ES LO DE AGUS FUNCIONANDO)
+		
+		
+		List<ServicioDTO> serviciosDTO = new ArrayList<ServicioDTO>();
+		
+		for (int i=0 ;i<response.length; i++) {
+			ServicioDTO servicioDTO = new ServicioDTO();
+			servicioDTO.setDescripcion(response[i].getNombre());
+			servicioDTO.setServicioId(Integer.valueOf(response[i].getId()));
+			servicioDTO.setTipo(Integer.valueOf(response[i].getTipo().getId()));
+			serviciosDTO.add(servicioDTO);
+		}
+		return serviciosDTO;
 	}
 	
 	public void toLog(LogBackOffice log) throws IOException{
@@ -290,6 +338,20 @@ public class Controlador implements ControladorRemote {
 	
 	@Override
 	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo){
+		try {
+			String tipoServicio = "";
+			if(tipo==1){
+				tipoServicio = "Hotel";
+			}
+			if(tipo==2){
+				tipoServicio = "Habitacion";
+			}
+			 List<ServicioDTO> listServiciosDTOs = obtenerServiciosPorTipoRest(tipoServicio);
+			 interfazRemota.cargarServiciosPorTipo(listServiciosDTOs);
+			 return listServiciosDTOs;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return interfazRemota.obtenerServiciosPorTipo(tipo);
 	}
 
