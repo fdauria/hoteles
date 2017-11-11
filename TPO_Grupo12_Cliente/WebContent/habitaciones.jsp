@@ -10,7 +10,7 @@
 		<h1>Carga de habitaciones</h1>
 		
 		<div style="margin-top: 10px; padding-bottom: 40px;"">
-			<form action="AgregarHabitacion" enctype="multipart/form-data" method="POST" class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
+			<form action="AgregarHabitacion" enctype="multipart/form-data" method="POST" name="hab" onsubmit="return validation()" class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
 				<div class="form-group">
 				    <label for="hotel">Hotel</label>
 				    <select id="hotel" class="form-control" data-style="btn-primary" name="hotel">
@@ -61,5 +61,46 @@
 			</form>
 		</div>
 	</div>
+	
+	<script>
+function validation() {
+	
+	
+	 var hotel = document.forms["hab"]["hotel"].value;
+    if (hotel == null || hotel == "") {
+        alert("El campo Hotel no puede estar vacio !!");
+        return false;
+    }
+
+   var nombre = document.forms["hab"]["nombre"].value;
+    if (nombre == null || nombre == "") {
+        alert("El campo Nombre no puede estar vacio !!");
+        return false;
+    }
+    var tipo = document.forms["hab"]["tipo"].value;
+    if (tipo == null || tipo == "") {
+        alert("El campo Tipo no puede estar vacio !!");
+        return false;
+    }
+    var capacidad = document.forms["hab"]["capacidad"].value;
+    if (capacidad == null || capacidad == "") {
+        alert("El campo Capacidad no puede estar vacio !!");
+        return false;
+    } 
+    var descripcion = document.forms["hab"]["descripcion"].value;
+    if (descripcion == null || descripcion == "") {
+        alert("El campo Descripcion no puede estar vacio !!");
+        return false;
+    }
+    var imagen = document.forms["hab"]["imagen"].value;
+    if (imagen == null || imagen == "") {
+        alert("El campo Imagen no puede estar vacio !!");
+        return false;
+    }
+    
+    
+    
+}
+</script>
 </body>
 </html>

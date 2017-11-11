@@ -9,7 +9,7 @@
 		<h1>Carga de oferta</h1>
 		
 		<div style="margin-top: 10px; padding-bottom: 40px;">
-			<form action="AgregarOferta" method="POST" class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
+			<form action="AgregarOferta" method="POST" onsubmit="return validationOfertas()" name="ofertasForm" class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
 				
 				<div class="form-group">
 				    <label for="hotel">Hotel</label>
@@ -100,6 +100,55 @@
 		
 		})
 	</script>
+	
+	
+		<script>
+function validationOfertas() {
+	
+	
+	 var hotel = document.forms["ofertasForm"]["hotel"].value;
+    if (hotel == null || hotel == "") {
+        alert("El campo Hotel no puede estar vacio !!");
+        return false;
+    }
+
+   var habitacion = document.forms["ofertasForm"]["habitacion"].value;
+    if (habitacion == null || habitacion == "") {
+        alert("El campo Habitacion no puede estar vacio !!");
+        return false;
+    }
+    var fechaDesde = document.forms["ofertasForm"]["fechaDesde"].value;
+    if (fechaDesde == null || fechaDesde == "") {
+        alert("El campo FechaDesde no puede estar vacio !!");
+        return false;
+    }
+    var fechaHasta = document.forms["ofertasForm"]["fechaHasta"].value;
+    if (fechaHasta == null || fechaHasta == "") {
+        alert("El campo FechaHasta no puede estar vacio !!");
+        return false;
+    } 
+    var precio = document.forms["ofertasForm"]["precio"].value;
+    if (precio == null || precio == "") {
+        alert("El campo Precio no puede estar vacio !!");
+        return false;
+    }
+    var cupo = document.forms["ofertasForm"]["cupo"].value;
+    if (cupo == null || cupo == "") {
+        alert("El campo Cupo no puede estar vacio !!");
+        return false;
+    }
+    var politicaDeCancelacion = document.forms["ofertasForm"]["politicaDeCancelacion"].value;
+    if (politicaDeCancelacion == null || politicaDeCancelacion == "") {
+        alert("El campo Politica De Cancelacion no puede estar vacio !!");
+        return false;
+    }
+    
+    
+    
+    
+    
+}
+</script>
 	
 </body>
 </html>
