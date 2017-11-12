@@ -150,7 +150,7 @@ public class Controlador implements ControladorRemote {
 		try {
 			toLog(new LogBackOffice("OH", "PW", "Crear oferta hotelera", ""));
 		} catch (IOException e1) {
-			System.out.println(e1.getMessage());
+			logger.error("Fallo al enviar el log al BackOffice --> Error de conexion: "+e1.getMessage());
 		}
 
 		Context context;
@@ -206,7 +206,7 @@ public class Controlador implements ControladorRemote {
 			producer.send(message);
 			connection.close();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			logger.error("Fallo al enviar la oferta al BackOffice: "+e.getMessage());
 		}
 	}
 
@@ -223,6 +223,7 @@ public class Controlador implements ControladorRemote {
 	@Override
 	public OfertaDTO agregarOferta(OfertaDTO oferta) {
 		OfertaDTO ofertaDTO =  interfazRemota.agregarOferta(oferta);
+		logger.info("Se ha solicitado la creación de una nueva Oferta ");
 		ofertaToJMS(ofertaDTO);
 		return ofertaDTO;
 	}

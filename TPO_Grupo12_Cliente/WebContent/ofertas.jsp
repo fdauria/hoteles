@@ -107,24 +107,6 @@
 				})
 	</script>
 	
-<!-- <script> -->
-// function fechaMin() {
-
-// 	var date = new Date();
-// 	date.setDate(date.getDate()-1);
-
-// 	$('#fechaDesde').datepicker({ 
-// 	    startDate: date
-// 	})
-
-	
-// $("#fechaDesde").datepicker({
-// 	      minDate:0,
-// 	});
-// }
-<!-- </script> -->
-
-
 	
 		<script>
 function validationOfertas() {
