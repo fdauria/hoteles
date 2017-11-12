@@ -19,8 +19,10 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.persistence.Cacheable;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 
@@ -43,7 +45,9 @@ public class Controlador implements ControladorRemote {
 
 	@EJB
 	private ManagerRemote interfazRemota;
-
+	
+	private static Logger logger = Logger.getLogger(Controlador.class);
+	
 	public Controlador() {
 	}
 	
@@ -55,6 +59,7 @@ public class Controlador implements ControladorRemote {
 	@Override
 	public HotelDTO agregarHotel(HotelDTO hotel) {
 		final HotelDTO hotelDTO = interfazRemota.agregarHotel(hotel);
+		logger.info("Se ha solicitado la creación de un nuevo Establecimiento ");
 		sendHotelToBackOffice(hotelDTO);
 		return hotelDTO;
 	}
@@ -80,7 +85,7 @@ public class Controlador implements ControladorRemote {
 			try {
 				toLog(new LogBackOffice("OH", "BO", "Crear establecimiento", "ERROR : " + e.getMessage()));
 			} catch (IOException e1) {
-				System.out.println("Fallo al enviar el establecimiento --> Error de conexion");
+				logger.error("Fallo al enviar el establecimiento --> Error de conexion: "+e1.getMessage());
 			}
 		}
 	}
@@ -350,7 +355,8 @@ public class Controlador implements ControladorRemote {
 			 interfazRemota.cargarServiciosPorTipo(listServiciosDTOs);
 			 return listServiciosDTOs;
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Fallo al obtener los servicios de BackOffice --> Error de conexion: "+e.getMessage());
+			logger.info("Se recuperan los servicios de BackOffice de nuestra base ");
 		}
 		return interfazRemota.obtenerServiciosPorTipo(tipo);
 	}

@@ -1,18 +1,13 @@
 package manager;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
+import javax.persistence.Cacheable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import org.apache.commons.io.IOUtils;
-
-import com.google.gson.Gson;
 
 import entities.Direccion;
 import entities.Habitacion;
@@ -20,13 +15,11 @@ import entities.Hotel;
 import entities.MedioDePago;
 import entities.Oferta;
 import entities.Servicio;
-import integracion.NuevoEstablecimientoJSON;
-import integracion.NuevoEstablecimientoResponse;
 import model.HabitacionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
 import model.OfertaDTO;
-import model.ServicioDTO;import sun.util.BuddhistCalendar;
+import model.ServicioDTO;
 
 @Stateless
 public class Manager implements ManagerRemote {
@@ -212,7 +205,7 @@ public class Manager implements ManagerRemote {
 	}
 	
 	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo){
-		cargarServicios();
+//		cargarServicios();
 		return getAll(Servicio.class, "Servicio").stream().filter(servicio -> servicio.getTipo() == tipo).map(x -> x.toDTO()).collect(Collectors.toList());
 	}
 
@@ -241,11 +234,11 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public void cargarMediosDePago() {
-		saveEntity(new MedioDePago(1, "Tarjeta de credito"));
-		saveEntity(new MedioDePago(2, "Cheque"));
-		saveEntity(new MedioDePago(3, "Pago en destino"));
-		saveEntity(new MedioDePago(4, "Mercado Pago"));
-		saveEntity(new MedioDePago(5, "Paypal"));
+		updateEntity(new MedioDePago(1, "Tarjeta de credito"));
+		updateEntity(new MedioDePago(2, "Cheque"));
+		updateEntity(new MedioDePago(3, "Pago en destino"));
+		updateEntity(new MedioDePago(4, "Mercado Pago"));
+		updateEntity(new MedioDePago(5, "Paypal"));
 	}
 
 	@Override

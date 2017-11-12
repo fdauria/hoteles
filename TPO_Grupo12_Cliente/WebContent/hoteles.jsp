@@ -56,7 +56,7 @@
 				    <input id="imagen" type="file" class="file" data-preview-file-type="any" name="imagen">
 				</div>
 				
-				<button type="submit" class="btn btn-primary">Agregar hotel</button>
+				<button type="submit" class="btn btn-primary" name="BotonAgregar">Agregar hotel</button>
 				<a href="./ListarHoteles" class="">Volver</button>
 
 			</form>
@@ -92,7 +92,6 @@ function validationHotel() {
         alert("El campo Imagen no puede estar vacio !!");
         return false;
     }
-    
     
     
 }
