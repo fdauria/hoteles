@@ -55,7 +55,7 @@
 				    <input id="imagen" type="file" class="file" data-preview-file-type="any" name="imagen">
 				</div>
 				
-				<button type="submit" class="btn btn-primary">Agregar habitacion</button>
+				<button type="submit" class="btn btn-primary" id="BotonHabitacion">Agregar habitacion</button>
 				<a href="./ListarHabitaciones" class="">Volver</button>
 
 			</form>
@@ -98,7 +98,8 @@ function validation() {
         return false;
     }
     
-    
+    document.getElementById('BotonHabitacion').disabled = 'disabled';
+
     
 }
 </script>

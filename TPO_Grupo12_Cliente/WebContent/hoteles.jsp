@@ -10,7 +10,7 @@
 		<h1>Carga de hotel</h1>
 		
 		<div style="margin-top: 10px; padding-bottom: 40px;">
-			<form action="AgregarHotel" enctype="multipart/form-data" method="POST" name="hotelForm" onsubmit="return validationHotel()"  class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
+			<form action="AgregarHotel" enctype="multipart/form-data" method="POST" name="hotelForm"  onsubmit="return validationHotel()"  class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4 col-md-6 col-xs-8 col-sm-6" style="margin:0 auto;">
 				<div class="form-group">
 					<label for="nombre">Nombre</label>
 				    <input type="text" class="form-control" id="nombre" name="nombre">
@@ -56,7 +56,7 @@
 				    <input id="imagen" type="file" class="file" data-preview-file-type="any" name="imagen">
 				</div>
 				
-				<button type="submit" class="btn btn-primary" name="BotonAgregar">Agregar hotel</button>
+				<button type="submit" class="btn btn-primary" id="BotonAgregar">Agregar hotel</button>
 				<a href="./ListarHoteles" class="">Volver</button>
 
 			</form>
@@ -93,7 +93,7 @@ function validationHotel() {
         return false;
     }
     
-    
+    document.getElementById('BotonAgregar').disabled = 'disabled';
 }
 </script>
 </body>

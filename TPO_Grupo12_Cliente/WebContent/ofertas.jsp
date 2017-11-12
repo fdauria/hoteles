@@ -56,7 +56,7 @@
 					<textarea class="form-control" rows="5" id="politicaDeCancelacion" name="politicaDeCancelacion"></textarea>
 				</div>
 								
-				<button type="submit" class="btn btn-primary">Agregar Oferta</button>
+				<button type="submit" class="btn btn-primary" id="BotonOfertas">Agregar Oferta</button>
 				<a href="ListarOfertas" class="">Volver</button>
 				
 			</form>
@@ -73,6 +73,8 @@
 				container: container,
 				todayHighlight: true,
 				autoclose: true,
+				changeYear : true,
+				changeMonth : true,
 			})
 			
 			var date_input=$('input[name="fechaHasta"]');
@@ -82,25 +84,47 @@
 				container: container,
 				todayHighlight: true,
 				autoclose: true,
+				changeYear : true,
+				changeMonth : true,
 			})
+			
 
-			$('#hotel').change (
-	            function() {
-	            	$('#habitacion').html("");
-	                $.ajax({
-	                    type: "POST",
-	                    url: "ObtenerHabitacionesPorHotel",
-	                    data: {hotel: $("#hotel").val() },
-	                    success: function(data){
-	                    	$('#habitacion').html(data)
-	                    }
-	                });
-	            }
-	        );
-		
-		})
+				
+					$('#hotel').change(function() {
+						$('#habitacion').html("");
+						$.ajax({
+							type : "POST",
+							url : "ObtenerHabitacionesPorHotel",
+							data : {
+								hotel : $("#hotel").val()
+							},
+							success : function(data) {
+								$('#habitacion').html(data)
+							}
+						});
+					});
+
+				})
 	</script>
 	
+<!-- <script> -->
+// function fechaMin() {
+
+// 	var date = new Date();
+// 	date.setDate(date.getDate()-1);
+
+// 	$('#fechaDesde').datepicker({ 
+// 	    startDate: date
+// 	})
+
+	
+// $("#fechaDesde").datepicker({
+// 	      minDate:0,
+// 	});
+// }
+<!-- </script> -->
+
+
 	
 		<script>
 function validationOfertas() {
@@ -144,7 +168,8 @@ function validationOfertas() {
     }
     
     
-    
+    document.getElementById('BotonOfertas').disabled = 'disabled';
+
     
     
 }
