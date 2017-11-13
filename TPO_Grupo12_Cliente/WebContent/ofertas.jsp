@@ -148,7 +148,7 @@ function validationOfertas() {
     }
 	var fechaActual = new Date(formatDate());
 	var fechaD = new Date(fechaDesde);
-	var fechaH = new Date(fechaDesde);
+	var fechaH = new Date(fechaHasta);
 	if(fechaActual>fechaD || fechaActual>fechaH){
         alert("Verifique las Fechas ingresadas no pueden ser menor a la Fecha Actual !!");
         return false;
