@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
-import javax.persistence.Cacheable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -240,6 +239,7 @@ public class Manager implements ManagerRemote {
 		updateEntity(new MedioDePago(4, "Mercado Pago"));
 		updateEntity(new MedioDePago(5, "Paypal"));
 	}
+	
 
 	@Override
 	public void cargarServiciosPorTipo(List<ServicioDTO> servicioDTOs) {

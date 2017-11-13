@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,15 +19,18 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import controllers.ControladorBS;
-import integracion.Props;
 import model.DireccionDTO;
 import model.HotelDTO;
 import model.MedioDePagoDTO;
 import model.ServicioDTO;
+import properties.EJBProperties;
 
 @WebServlet("/AgregarHotel")
 public class AgregarHotel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	@EJB
+	EJBProperties properties;
 
 	public AgregarHotel() {
 		super();
@@ -98,7 +102,8 @@ public class AgregarHotel extends HttpServlet {
 					Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 					fileName = "hotel" + timestamp.getTime();
 					String filePath = uploadPath + File.separator + fileName + ".jpg";
-					String fileContextPath = Props.IP_LOCAL + uploadContextPath + File.separator + fileName + ".jpg";
+					String fileContextPath = properties.getProperties().getProperty("IP_LOCAL") + uploadContextPath
+							+ File.separator + fileName + ".jpg";
 
 					File storeFile = new File(filePath);
 					// saves the file on disk

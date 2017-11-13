@@ -33,6 +33,7 @@ public class Hoteles extends HttpServlet {
 			throws ServletException, IOException {
 		request.setAttribute("servicios", ControladorBS.getInstancia().obtenerServiciosPorTipo(1));
 		request.setAttribute("mediosDePago", ControladorBS.getInstancia().obtenerMediosDePago());
+
 		request.getRequestDispatcher("/hoteles.jsp").forward(request, response);
 	}
 

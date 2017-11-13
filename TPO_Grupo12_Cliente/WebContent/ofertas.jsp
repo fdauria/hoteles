@@ -63,6 +63,20 @@
 		</div>
 	</div>
 	
+	<script>
+	function formatDate() {
+	    var d = new Date(),
+	        month = '' + (d.getMonth() + 1),
+	        day = '' + d.getDate(),
+	        year = d.getFullYear();
+
+	    if (month.length < 2) month = '0' + month;
+	    if (day.length < 2) day = '0' + day;
+
+	    return [month, day,year].join('/');
+	}
+	</script>
+	
 	
 	<script>
 		$(document).ready(function(){
@@ -110,8 +124,6 @@
 	
 		<script>
 function validationOfertas() {
-	
-	
 	 var hotel = document.forms["ofertasForm"]["hotel"].value;
     if (hotel == null || hotel == "") {
         alert("El campo Hotel no puede estar vacio !!");
@@ -128,11 +140,20 @@ function validationOfertas() {
         alert("El campo FechaDesde no puede estar vacio !!");
         return false;
     }
+    
     var fechaHasta = document.forms["ofertasForm"]["fechaHasta"].value;
     if (fechaHasta == null || fechaHasta == "") {
         alert("El campo FechaHasta no puede estar vacio !!");
         return false;
-    } 
+    }
+	var fechaActual = new Date(formatDate());
+	var fechaD = new Date(fechaDesde);
+	var fechaH = new Date(fechaDesde);
+	if(fechaActual>fechaD || fechaActual>fechaH){
+        alert("Verifique las Fechas ingresadas no pueden ser menor a la Fecha Actual !!");
+        return false;
+	}
+    
     var precio = document.forms["ofertasForm"]["precio"].value;
     if (precio == null || precio == "") {
         alert("El campo Precio no puede estar vacio !!");
@@ -148,7 +169,6 @@ function validationOfertas() {
         alert("El campo Politica De Cancelacion no puede estar vacio !!");
         return false;
     }
-    
     
     document.getElementById('BotonOfertas').disabled = 'disabled';
 

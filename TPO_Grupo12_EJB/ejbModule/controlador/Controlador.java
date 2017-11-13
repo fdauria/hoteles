@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -31,7 +32,6 @@ import integracion.LogBackOffice;
 import integracion.NuevoEstablecimientoJSON;
 import integracion.NuevoEstablecimientoResponse;
 import integracion.OfertaJMS;
-import integracion.Props;
 import integracion.RequestServiciosTipo;
 import integracion.ServiciosJSON;
 import integracion.ServiciosPorTipoResponseJSON;
@@ -41,12 +41,16 @@ import model.HotelDTO;
 import model.MedioDePagoDTO;
 import model.OfertaDTO;
 import model.ServicioDTO;
+import properties.EJBProperties;
 
 @Stateless
 public class Controlador implements ControladorRemote {
 
 	@EJB
 	private ManagerRemote interfazRemota;
+	
+	@EJB
+	private EJBProperties properties;
 	
 	private static Logger logger = Logger.getLogger(Controlador.class);
 	
@@ -71,7 +75,7 @@ public class Controlador implements ControladorRemote {
 		try {
 			toLog(new LogBackOffice("OH", "BO", "Crear establecimiento", "INFO"));
 			
-			url = new URL(Props.URL_SEND_HOTEL_BACKOFFICE);
+			url = new URL(properties.getProperties().getProperty("URL_SEND_HOTEL_BACKOFFICE"));
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.setDoOutput(true);
 			urlConnection.setRequestMethod("POST");
@@ -94,14 +98,15 @@ public class Controlador implements ControladorRemote {
 	
 	public List<ServiciosJSON> obtenerServicios() throws IOException{
 		URL url;
-		url = new URL(Props.URL_OBTENER_SERVICIOS);
+		url = new URL(properties.getProperties().getProperty("URL_OBTENER_SERVICIOS"));
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoInput(true);
 		urlConnection.setRequestMethod("GET");
 		final ServiciosJSON[] listServHabitacion = new Gson().fromJson((Reader)new InputStreamReader(urlConnection.getInputStream()), ServiciosJSON[].class);
 
-		List<ServiciosJSON> seree = new ArrayList<ServiciosJSON>();
-		return seree;
+		List<ServiciosJSON> servicios = new ArrayList<ServiciosJSON>();
+		servicios = Arrays.asList(listServHabitacion);
+		return servicios;
 	}
 	
 	
@@ -109,7 +114,7 @@ public class Controlador implements ControladorRemote {
 		toLog(new LogBackOffice("OH", "BO", "Obtener servicios por tipo", ""));
 
 		//DESDE ACA NO TOCAR (ES LO DE AGUS FUNCIONANDO)
-		URL url = new URL(Props.URL_OBTENER_SERVICIOS_POR_TIPO);
+		URL url = new URL(properties.getProperties().getProperty("URL_OBTENER_SERVICIOS_POR_TIPO"));
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("POST");
@@ -135,7 +140,7 @@ public class Controlador implements ControladorRemote {
 	}
 	
 	public void toLog(LogBackOffice log) throws IOException{
-		URL url = new URL(Props.URL_TO_LOG);
+		URL url = new URL(properties.getProperties().getProperty("URL_TO_LOG"));
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
 		urlConnection.setRequestMethod("POST");
@@ -158,19 +163,19 @@ public class Controlador implements ControladorRemote {
 		{
 		    final Properties env = new Properties();
             env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-            env.put(Context.PROVIDER_URL, Props.ofertaToJMS_PROVIDER_URL_value);
-            env.put(Context.SECURITY_PRINCIPAL, Props.usernameConnOferta);
-            env.put(Context.SECURITY_CREDENTIALS, Props.passwordConnOferta);
+            env.put(Context.PROVIDER_URL, properties.getProperties().getProperty("ofertaToJMS_PROVIDER_URL_value"));
+            env.put(Context.SECURITY_PRINCIPAL, properties.getProperties().getProperty("usernameConnOferta"));
+            env.put(Context.SECURITY_CREDENTIALS, properties.getProperties().getProperty("passwordConnOferta"));
             context = new InitialContext(env);
  
             // Perform the JNDI lookups
-            String connectionFactoryString = Props.connection_factory_value;
+            String connectionFactoryString = properties.getProperties().getProperty("connection_factory_value");
             ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
  
-            String destinationString = Props.destinationOfertaToJMS;
+            String destinationString = properties.getProperties().getProperty("destinationOfertaToJMS");
             Destination destination = (Destination) context.lookup(destinationString);
  
-            Connection connection = connectionFactory.createConnection(Props.usernameConnOferta, Props.passwordConnOferta);
+            Connection connection = connectionFactory.createConnection(properties.getProperties().getProperty("usernameConnOferta"), properties.getProperties().getProperty("passwordConnOferta"));
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             connection.start();
 			MessageProducer producer = session.createProducer(destination);

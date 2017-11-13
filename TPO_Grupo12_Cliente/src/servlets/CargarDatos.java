@@ -23,7 +23,6 @@ public class CargarDatos extends HttpServlet {
 			throws ServletException, IOException {
 		ControladorBS.getInstancia().cargarServicios();
 		ControladorBS.getInstancia().cargarMediosDePago();
-
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 
 	}
