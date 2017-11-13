@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -20,7 +21,6 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.persistence.Cacheable;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -177,29 +177,28 @@ public class Controlador implements ControladorRemote {
 			TextMessage message = session.createTextMessage();
 			
 			final HotelDTO h = o.getHotel();
-            final HabitacionDTO hab = o.getHabitacion();
+	        final HabitacionDTO hab = o.getHabitacion();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyymmdd");
-            final OfertaJMS ofertaJMS = new OfertaJMS("OH_12_" + h.getBackofficeId(),
-        		h.getNombre(),
-        		h.getDireccion().getDestino(),
-        		simpleDateFormat.format(o.getFechadDesde()),
-        		simpleDateFormat.format(o.getFechaHasta()),
-        		o.getHabitacion().getCapacidad(),
-        		h.getImagen(),
-        		h.getNombre(),
-        		h.getServicios(),
-        		o.getPrecio(),
-        		o.getHabitacion().getImagen(),
-        		o.getHabitacion().getDescripcion(),
-        		o.getHabitacion().getServicios(),
-        		h.getDireccion().getLatitud(),
-        		h.getDireccion().getLongitud(),
-        		o.getPoliticaCancelacion(),
-        		h.getMediosDePago(),
-        		"",
-        		o.getCupo()
-    		);
-			
+	        final OfertaJMS ofertaJMS = new OfertaJMS("OH_12_" + h.getBackofficeId(),
+	    		h.getNombre(),
+	    		h.getDireccion().getDestino(),
+	    		simpleDateFormat.format(o.getFechadDesde()),
+	    		simpleDateFormat.format(o.getFechaHasta()),
+	    		hab.getCapacidad(),
+	    		h.getImagen(),
+	    		h.getNombre(),
+	    		h.getServicios().stream().map(servicio -> servicio.getDescripcion()).collect(Collectors.toList()),
+	    		o.getPrecio(),
+	    		hab.getImagen(),
+	    		hab.getDescripcion(),
+	    		hab.getServicios().stream().map(servicio -> servicio.getDescripcion()).collect(Collectors.toList()),
+	    		Float.parseFloat(h.getDireccion().getLatitud()),
+	    		Float.parseFloat(h.getDireccion().getLongitud()),
+	    		o.getPoliticaCancelacion(),
+	    		h.getMediosDePago().stream().map(medioDePago -> medioDePago.getMedioDePagoId()).collect(Collectors.toList()),
+	    		"",
+	    		o.getCupo()
+			);
 			
 			message.setText(new Gson().toJson(ofertaJMS));
 			

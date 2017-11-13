@@ -28,10 +28,6 @@ public class OfertaJMS {
 	private int cupo;
 	private String descripcion_habitacion;
 	
-	public OfertaJMS() {
-		super();
-	}
-	
 	public OfertaJMS(String codigo_prestador, String nombre, String destino, String fecha_desde, String fecha_hasta,
 			int cantidad_personas, String foto_hotel, String descripcion_hotel, List<String> lista_servicios,
 			float precio_habitacion, String foto_habitacion, String descripcion_habitacion, List<String> lista_servicios_habitacion, float latitud,
@@ -56,13 +52,6 @@ public class OfertaJMS {
 		this.medio_de_pago = medio_de_pago;
 		this.email_hotel = email_hotel;
 		this.cupo = cupo;
-	}
-
-	public OfertaJMS(String string, String nombre2, String destino2, String format, String format2, int capacidad,
-			String imagen, String nombre3, List<ServicioDTO> servicios, float precio, String imagen2,
-			String descripcion, List<ServicioDTO> servicios2, String latitud2, String longitud2,
-			String politicaCancelacion, List<MedioDePagoDTO> mediosDePago, String string2, int cupo2) {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getCodigo_prestador() {
@@ -131,6 +120,15 @@ public class OfertaJMS {
 	public void setFoto_habitacion(String foto_habitacion) {
 		this.foto_habitacion = foto_habitacion;
 	}
+	
+	public String getDescripcion_habitacion() {
+		return descripcion_habitacion;
+	}
+
+	public void setDescripcion_habitacion(String descripcion_habitacion) {
+		this.descripcion_habitacion = descripcion_habitacion;
+	}
+	
 	public List<String> getLista_servicios_habitacion() {
 		return lista_servicios_habitacion;
 	}
@@ -172,15 +170,6 @@ public class OfertaJMS {
 	}
 	public void setCupo(int cupo) {
 		this.cupo = cupo;
-	}
-
-	public String getDescripcion_habitacion() {
-		return descripcion_habitacion;
-	}
-
-	public void setDescripcion_habitacion(String descripcion_habitacion) {
-		this.descripcion_habitacion = descripcion_habitacion;
-	}
-	
+	}	
 	
 }

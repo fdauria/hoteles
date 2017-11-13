@@ -20,8 +20,9 @@
 				
 				<div class="form-group">
 					<label for="destino">Destino</label>
-				    <input type="text" class="form-control" id="destino" name="destino">
-				    <small id="destino" class="form-text text-muted">Ingrese el destino</small>
+					<select id="destino" class="form-control" data-style="btn-primary" name="destino">
+				    	<%@ include file="destinos.html" %>
+					</select>
 				</div>
 				
 				<div class="form-group">

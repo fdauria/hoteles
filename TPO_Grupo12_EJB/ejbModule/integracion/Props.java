@@ -14,7 +14,7 @@ public class Props {
 	public static String usernameConnOferta  			= "hornetq";
 	public static String passwordConnOferta  			= "hornetq";
 	
-	public static String IP_LOCAL = "192.168.0.104";
+	public static String IP_LOCAL = "192.168.0.104:8080";
 	
 	public static String IP_BACKOFFICE 						= "http://192.168.0.108:8080";
 	public static String URL_OBTENER_SERVICIOS 				= IP_BACKOFFICE + "/TPO_BO_WEB/rest/ServiciosBO/GetServicios";

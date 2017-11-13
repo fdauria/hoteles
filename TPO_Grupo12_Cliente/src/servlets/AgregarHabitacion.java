@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import controllers.ControladorBS;
+import integracion.Props;
 import model.HabitacionDTO;
 import model.HotelDTO;
 import model.ServicioDTO;
@@ -83,7 +84,7 @@ public class AgregarHabitacion extends HttpServlet {
 					Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 					fileName = "habitacion" + timestamp.getTime();
 					String filePath = uploadPath + File.separator + fileName + ".jpg";
-					String fileContextPath = uploadContextPath + File.separator + fileName + ".jpg";
+					String fileContextPath = Props.IP_LOCAL + uploadContextPath + File.separator + fileName + ".jpg";
 
 					File storeFile = new File(filePath);
 					// saves the file on disk
