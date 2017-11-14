@@ -63,8 +63,6 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public HotelDTO agregarHotel(HotelDTO hotelDTO) {
-//		Hotel hotel = saveEntity(hotelFromDTO(hotelDTO));
-//		Hotel hotel = updateEntity(hotelFromDTO(hotelDTO));
 		Hotel hotel = hotelFromDTO(hotelDTO);
 		
 		final List<Servicio> servicios = new ArrayList<>();
@@ -86,8 +84,6 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public OfertaDTO agregarOferta(OfertaDTO ofertaDTO) {
-//		Oferta oferta = saveEntity(ofertaFromDTO(ofertaDTO));
-//		Oferta oferta = updateEntity(ofertaFromDTO(ofertaDTO));
 		Oferta oferta = ofertaFromDTO(ofertaDTO);
 		
 		oferta.setHotel(obtenerHotelEntity(ofertaDTO.getHotel().getHotelId()));
@@ -210,7 +206,6 @@ public class Manager implements ManagerRemote {
 	}
 	
 	public List<ServicioDTO> obtenerServiciosPorTipo(int tipo){
-//		cargarServicios();
 		return getAll(Servicio.class, "Servicio").stream().filter(servicio -> servicio.getTipo() == tipo).map(x -> x.toDTO()).collect(Collectors.toList());
 	}
 
@@ -250,7 +245,6 @@ public class Manager implements ManagerRemote {
 	@Override
 	public void cargarServiciosPorTipo(List<ServicioDTO> servicioDTOs) {
 		for (ServicioDTO servicioDTO : servicioDTOs) {
-//			saveEntity(new Servicio(servicioDTO.getServicioId(),servicioDTO.getTipo(), servicioDTO.getDescripcion()));
 			updateEntity(new Servicio(servicioDTO.getServicioId(),servicioDTO.getTipo(), servicioDTO.getDescripcion()));
 		}
 		

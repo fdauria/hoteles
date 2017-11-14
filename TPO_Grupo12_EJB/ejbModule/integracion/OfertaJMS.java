@@ -2,9 +2,6 @@ package integracion;
 
 import java.util.List;
 
-import model.MedioDePagoDTO;
-import model.ServicioDTO;
-
 public class OfertaJMS {
 
 	
