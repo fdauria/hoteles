@@ -38,6 +38,7 @@ public class Manager implements ManagerRemote {
 
 	public <T> T updateEntity(T entity) {
 		em.merge(entity);
+
 		return entity;
 	}
 
@@ -62,8 +63,9 @@ public class Manager implements ManagerRemote {
 
 	@Override
 	public HotelDTO agregarHotel(HotelDTO hotelDTO) {
-		Hotel hotel = saveEntity(hotelFromDTO(hotelDTO));
-		
+//		Hotel hotel = saveEntity(hotelFromDTO(hotelDTO));
+//		Hotel hotel = updateEntity(hotelFromDTO(hotelDTO));
+		Hotel hotel = hotelFromDTO(hotelDTO);
 		
 		final List<Servicio> servicios = new ArrayList<>();
 		for(final ServicioDTO servicioDTO : hotelDTO.getServicios())
@@ -79,20 +81,24 @@ public class Manager implements ManagerRemote {
 		if(!medioDePagoList.isEmpty())
 			hotel.setMediosDePago(medioDePagoList);	
 		
-		return updateEntity(hotel).toDTO();
+		return saveEntity(hotel).toDTO();
 	}
 
 	@Override
 	public OfertaDTO agregarOferta(OfertaDTO ofertaDTO) {
-		Oferta oferta = saveEntity(ofertaFromDTO(ofertaDTO));
-
+//		Oferta oferta = saveEntity(ofertaFromDTO(ofertaDTO));
+//		Oferta oferta = updateEntity(ofertaFromDTO(ofertaDTO));
+		Oferta oferta = ofertaFromDTO(ofertaDTO);
+		
 		oferta.setHotel(obtenerHotelEntity(ofertaDTO.getHotel().getHotelId()));
 		oferta.setHabitacion(obtenerHabitacionEntity(ofertaDTO.getHabitacion().getHabitacionId()));
 		return updateEntity(oferta).toDTO();
 	}
 	
 	public HotelDTO actualizarConIdBackoffice(HotelDTO hotelDTO){
-		return updateEntity(hotelFromDTO(hotelDTO)).toDTO();
+		 Hotel hotel = obtenerHotelEntity(hotelDTO.getHotelId());
+		 hotel.setBackofficeId(hotelDTO.getBackofficeId());
+		 return updateEntity(hotel).toDTO();
 	}
 	
 	@Override
@@ -244,7 +250,8 @@ public class Manager implements ManagerRemote {
 	@Override
 	public void cargarServiciosPorTipo(List<ServicioDTO> servicioDTOs) {
 		for (ServicioDTO servicioDTO : servicioDTOs) {
-			saveEntity(new Servicio(servicioDTO.getServicioId(),servicioDTO.getTipo(), servicioDTO.getDescripcion()));
+//			saveEntity(new Servicio(servicioDTO.getServicioId(),servicioDTO.getTipo(), servicioDTO.getDescripcion()));
+			updateEntity(new Servicio(servicioDTO.getServicioId(),servicioDTO.getTipo(), servicioDTO.getDescripcion()));
 		}
 		
 	}

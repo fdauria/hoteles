@@ -183,8 +183,8 @@ public class Controlador implements ControladorRemote {
 			
 			final HotelDTO h = o.getHotel();
 	        final HabitacionDTO hab = o.getHabitacion();
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyymmdd");
-	        final OfertaJMS ofertaJMS = new OfertaJMS("OH_12_" + h.getBackofficeId(),
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+	        final OfertaJMS ofertaJMS = new OfertaJMS(String.valueOf(h.getBackofficeId()),
 	    		h.getNombre(),
 	    		h.getDireccion().getDestino(),
 	    		simpleDateFormat.format(o.getFechadDesde()),

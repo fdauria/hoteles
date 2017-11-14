@@ -18,8 +18,8 @@
 			      <th scope="col">Nombre</th>
     			  <th scope="col">Destino</th>
 			      <th scope="col">Direccion</th>
-			      <th scope="col">Servicios</th>
     			  <th scope="col">Medios de pago</th>
+			      <th scope="col">Servicios</th>
     			  <th scope="col">#IdBO</th>
 			    </tr>
 			 </thead>

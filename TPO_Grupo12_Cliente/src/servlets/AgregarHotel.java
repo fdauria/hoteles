@@ -58,8 +58,8 @@ public class AgregarHotel extends HttpServlet {
 		String imagen = "";
 
 		ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-		String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
-		String uploadContextPath = getServletContext().getContextPath() + File.separator + "uploads";
+		String uploadPath = getServletContext().getRealPath("") + "/" + "uploads";
+		String uploadContextPath = getServletContext().getContextPath() + "/" + "uploads";
 
 		File uploadDir = new File(uploadPath);
 		if (!uploadDir.exists()) {
@@ -101,9 +101,9 @@ public class AgregarHotel extends HttpServlet {
 					String fileName = new File(item.getName()).getName();
 					Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 					fileName = "hotel" + timestamp.getTime();
-					String filePath = uploadPath + File.separator + fileName + ".jpg";
+					String filePath = uploadPath + "/" + fileName + ".jpg";
 					String fileContextPath = properties.getProperties().getProperty("IP_LOCAL") + uploadContextPath
-							+ File.separator + fileName + ".jpg";
+							+ "/" + fileName + ".jpg";
 
 					File storeFile = new File(filePath);
 					// saves the file on disk

@@ -29,7 +29,7 @@ public class AgregarOferta extends HttpServlet {
 	private Date getDate(String dateStr) {
 		Date date = null;
 		try {
-			date = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH).parse(dateStr);
+			date = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH).parse(dateStr);
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}

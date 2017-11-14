@@ -23,7 +23,7 @@ public class OfertaJMS {
 	private float latitud;
 	private float longitud;
 	private String politica_cancelacion;
-	private List<Integer> medio_de_pago;
+	private List<Integer> medio_pago_hotel;
 	private String email_hotel;
 	private int cupo;
 	private String descripcion_habitacion;
@@ -31,7 +31,7 @@ public class OfertaJMS {
 	public OfertaJMS(String codigo_prestador, String nombre, String destino, String fecha_desde, String fecha_hasta,
 			int cantidad_personas, String foto_hotel, String descripcion_hotel, List<String> lista_servicios,
 			float precio_habitacion, String foto_habitacion, String descripcion_habitacion, List<String> lista_servicios_habitacion, float latitud,
-			float longitud, String politica_cancelacion, List<Integer> medio_de_pago, String email_hotel, int cupo) {
+			float longitud, String politica_cancelacion, List<Integer> medio_pago_hotel, String email_hotel, int cupo) {
 		super();
 		this.codigo_prestador = codigo_prestador;
 		this.nombre = nombre;
@@ -49,7 +49,7 @@ public class OfertaJMS {
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.politica_cancelacion = politica_cancelacion;
-		this.medio_de_pago = medio_de_pago;
+		this.setMedio_pago_hotel(medio_pago_hotel);
 		this.email_hotel = email_hotel;
 		this.cupo = cupo;
 	}
@@ -153,12 +153,6 @@ public class OfertaJMS {
 	public void setPolitica_cancelacion(String politica_cancelacion) {
 		this.politica_cancelacion = politica_cancelacion;
 	}
-	public List<Integer> getMedio_de_pago() {
-		return medio_de_pago;
-	}
-	public void setMedio_de_pago(List<Integer> medio_de_pago) {
-		this.medio_de_pago = medio_de_pago;
-	}
 	public String getEmail_hotel() {
 		return email_hotel;
 	}
@@ -170,6 +164,14 @@ public class OfertaJMS {
 	}
 	public void setCupo(int cupo) {
 		this.cupo = cupo;
+	}
+
+	public List<Integer> getMedio_pago_hotel() {
+		return medio_pago_hotel;
+	}
+
+	public void setMedio_pago_hotel(List<Integer> medio_pago_hotel) {
+		this.medio_pago_hotel = medio_pago_hotel;
 	}	
 	
 }
